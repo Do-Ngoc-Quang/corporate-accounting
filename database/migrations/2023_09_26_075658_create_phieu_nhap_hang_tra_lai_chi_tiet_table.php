@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('phieu_nhap_hang_tra_lai_chi_tiets', function (Blueprint $table) {
             $table->id();
-            // $table->string('MaSo')->unique();
             $table->string('MaChungTu');
             $table->foreign('MaChungTu')->references('MaChungTu')->on('phieu_nhap_hang_tra_lais');
             $table->string('MaHang');

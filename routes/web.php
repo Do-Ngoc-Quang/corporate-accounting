@@ -3,7 +3,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
 use App\Http\Controllers\DanhMucTaiKhoansController;
 use App\Http\Controllers\DanhMucKhachHangVaTaiKhoanCongNosController;
 use App\Http\Controllers\DanhMucHangHoasController;
@@ -15,10 +14,8 @@ use App\Http\Controllers\PhieuXuatHangHoasController;
 use App\Http\Controllers\ChungTuGhiSosController;
 use App\Http\Controllers\ChungTuKetChuyenController;
 use App\Http\Controllers\ChungTuNganHangController;
+use App\Http\Controllers\PhieuNhapHangTraLaiController;
 use App\Http\Controllers\USERController;
-
-use App\Models\ChungTuGhiSo;
-use App\Models\PhieuNhapHangHoa;
 
 /*
 |--------------------------------------------------------------------------
@@ -186,15 +183,28 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ChungTuKetChuyenController::class)->group(function () {
         //Chứng từ ngân hàng
         Route::get('chungtuketchuyen', 'index');
-        // Route::get('chungtuketchuyen/{machungtu}', 'get_chungtuketchuyen');
-        // Route::post('chungtuketchuyen_add', 'store')->name('chungtuketchuyen.store');
-        // Route::put('chungtuketchuyen_update/{id}', 'update');
+        Route::get('chungtuketchuyen/{machungtu}', 'get_chungtuketchuyen');
+        Route::post('chungtuketchuyen_add', 'store')->name('chungtuketchuyen.store');
+        Route::put('chungtuketchuyen_update/{id}', 'update');
 
-        // //Chứng từ ngân hàng chi tiết
-        // Route::get('chungtuketchuyenchitiet/{machungtu}', 'get_chungtuketchuyenchitiet');
-        // Route::put('chungtuketchuyenchitiet_update/{id}', 'chungtuketchuyenchitiet_update');
+        //Chứng từ ngân hàng chi tiết
+        Route::get('chungtuketchuyenchitiet/{machungtu}', 'get_chungtuketchuyenchitiet');
+        Route::put('chungtuketchuyenchitiet_update/{id}', 'chungtuketchuyenchitiet_update');
     });
 
+    //Phiếu nhập hàng trả lại
+    Route::controller(PhieuNhapHangTraLaiController::class)->group(function () {
+        //Phiếu nhập hàng trả lại
+        Route::get('phieunhaphangtralai', 'index');
+        Route::get('phieunhaphangtralai/{machungtu}', 'get_phieunhaphangtralai');
+        Route::post('phieunhaphangtralai_add', 'store')->name('phieunhaphangtralai.store');
+        Route::put('phieunhaphangtralai_update/{id}', 'update');
+
+        //Chi tiết
+        Route::get('phieunhaphangtralaichitiet/{machungtu}', 'get_phieunhaphangtralaichitiet');
+        Route::put('phieunhaphangtralaichitiet_update/{id}', 'phieunhaphangtralaichitiet_update');
+
+    });
     //Phân quyền
     Route::controller(PhanQuyenController::class)->group(function () {
         Route::get('phanquyen', 'index');

@@ -103,7 +103,7 @@
             <div class="col-10">
                 <table class="custom-table" id="dataTable">
                     <tbody>
-                        <tr data-id="trChungTuNganHang">
+                        <tr data-id="trChungTu">
                             <td>
                                 <div class="row-col-10">
                                     <div class="label-col-10">Loại chứng từ:</div>
@@ -121,7 +121,7 @@
                                     <div class="label-col-10">Ngày chứng từ:</div>
                                     <div class="input-col-10"><input style="text-align:center; width: 200px;" type="date" id="ngayChungTu"></div>
                                 </div>
-                                
+
                                 <div class="row-col-10">
                                     <div class="label-col-10">Diễn giải:</div>
                                     <div class="input-col-10"><textarea style="margin-left: 42px;" id="dienGiai" cols="40" rows="2"></textarea></div>
@@ -134,9 +134,7 @@
                                     <div>
                                         <input type="hidden" id="id">
                                     </div>
-                                    <!-- <label></label> -->
                                 </div>
-
                             </td>
                         </tr>
                     </tbody>
@@ -187,7 +185,6 @@
     var txtsoChungTu = document.getElementById("soChungTu");
     var txtmaChungTu = document.getElementById("maChungTu");
     var txtngayChungTu = document.getElementById("ngayChungTu");
-    var txtngayHoaDon = document.getElementById("ngayHoaDon");
 
     //Lấy thẻ checkbox cho phép chỉnh sửa
     var checkbox = document.getElementById("edit");
@@ -200,15 +197,9 @@
         txtngayChungTu.disabled = true;
         checkbox.checked = false;
 
-        document.getElementById('thu').disabled = true;
-        document.getElementById('chi').disabled = true;
-
         //Thiết lập các button ẩn đi
         btnCapNhat.disabled = false;
         btnTaoPhieu.disabled = true;
-
-        //Thiết lập lại thẻ select thành thẻ input để hiển thị thông tin mã khách hàng
-        replaceSelectWithInput()
 
         // Bỏ lớp highlight ở tất cả các thẻ tr
         var allRows = document.querySelectorAll(".custom-table-showID tbody tr");
@@ -220,7 +211,7 @@
         row.classList.add("highlight");
 
         // Xử lý hiện thị chi tiết phiếu chi
-        fetch('chungtunganhang/' + machungtu)
+        fetch('chungtuketchuyen/' + machungtu)
 
             .then(response => {
                 if (!response.ok) {
@@ -231,22 +222,13 @@
             .then(data => {
 
                 //Đoạn code dưới đây thực thi sự cập nhật, tức hiển thị dữ liệu tức thì mà không tải lại trang
-                data.forEach(chungtunganhang => {
-                    $("tr[data-id='trChungTuNganHang'] td input#loaiChungTu").val(chungtunganhang.LoaiChungTu);
-                    $("tr[data-id='trChungTuNganHang'] td input#soChungTu").val(chungtunganhang.SoChungTu);
-                    $("tr[data-id='trChungTuNganHang'] td input#maChungTu").val(chungtunganhang.MaChungTu);
-                    $("tr[data-id='trChungTuNganHang'] td input#ngayChungTu").val(chungtunganhang.NgayChungTu);
-                    $("tr[data-id='trChungTuNganHang'] td input#hoTen").val(chungtunganhang.HoTen);
-                    $("tr[data-id='trChungTuNganHang'] td textarea#dienGiai").val(chungtunganhang.DienGiai);
-                    $("tr[data-id='trChungTuNganHang'] td input#maKhachHang").val(chungtunganhang.MaKhachHang);
-                    $("tr[data-id='trChungTuNganHang'] td input#tenKhachHang").val(chungtunganhang.TenKhachHang);
-                    $("tr[data-id='trChungTuNganHang'] td input#maSoThue").val(chungtunganhang.MaSoThue);
-                    if (chungtunganhang.ThuChi === 1) {
-                        $("input[name='thuChi'][value='1']").prop('checked', true);
-                    } else if (chungtunganhang.ThuChi === 2) {
-                        $("input[name='thuChi'][value='2']").prop('checked', true);
-                    }
-                    $("tr[data-id='trChungTuNganHang'] td input#id").val(chungtunganhang.id);
+                data.forEach(chungtuketchuyen => {
+                    $("tr[data-id='trChungTu'] td input#loaiChungTu").val(chungtuketchuyen.LoaiChungTu);
+                    $("tr[data-id='trChungTu'] td input#soChungTu").val(chungtuketchuyen.SoChungTu);
+                    $("tr[data-id='trChungTu'] td input#maChungTu").val(chungtuketchuyen.MaChungTu);
+                    $("tr[data-id='trChungTu'] td input#ngayChungTu").val(chungtuketchuyen.NgayChungTu);
+                    $("tr[data-id='trChungTu'] td textarea#dienGiai").val(chungtuketchuyen.DienGiai);
+                    $("tr[data-id='trChungTu'] td input#id").val(chungtuketchuyen.id);
                 });
             })
             .catch(error => {
@@ -256,23 +238,23 @@
 
 
         // Xử lý hiện thị phiếu chi chi tiết
-        fetch('chungtunganhangchitiet/' + machungtu)
+        fetch('chungtuketchuyenchitiet/' + machungtu)
 
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
                 }
                 return response.json();
             })
             .then(data => {
 
-                // Lấy thẻ tbody của dataTablechungtunganhangChiTiet
+                // Lấy thẻ tbody của dataTableChiTiet
                 var tableBody = document.getElementById("dataTableChiTiet").getElementsByTagName("tbody")[0];
 
                 // Xóa toàn bộ nội dung trong tbody
                 tableBody.innerHTML = '';
 
-                data.forEach(chungtunganhangchitiet => {
+                data.forEach(chungtuketchuyenchitiet => {
 
                     // Thêm dữ liệu mới vào tbody
                     var newRow = tableBody.insertRow(tableBody.rows.length);
@@ -284,11 +266,11 @@
                     var cell4 = newRow.insertCell(3);
                     var cell5 = newRow.insertCell(4);
 
-                    cell1.innerHTML = `<textarea style="width: 580px" cols="30" rows="3" id="dienGiaiChiTiet">${chungtunganhangchitiet.DienGiaiChiTiet}</textarea>`;
-                    cell2.innerHTML = `<input style="width: 245px; text-align: center;" type="text" id="soTien" value="${chungtunganhangchitiet.SoTien}">`;
-                    cell3.innerHTML = `<input style="width: 110px; text-align: center;" type="text" id="taiKhoanNo" value="${chungtunganhangchitiet.TaiKhoanNo}" readonly>`;
-                    cell4.innerHTML = `<input style="width: 110px; text-align: center;" type="text" id="taiKhoanCo" value="${chungtunganhangchitiet.TaiKhoanCo}" readonly>`;
-                    cell5.innerHTML = `<button type="button" onclick="updateChungTuChiTiet( '${chungtunganhangchitiet.id}')">Cập nhật</button>`;
+                    cell1.innerHTML = `<textarea style="width: 580px" cols="30" rows="3" id="dienGiaiChiTiet">${chungtuketchuyenchitiet.DienGiaiChiTiet}</textarea>`;
+                    cell2.innerHTML = `<input style="width: 245px; text-align: center;" type="text" id="soTien" value="${chungtuketchuyenchitiet.SoTien}">`;
+                    cell3.innerHTML = `<input style="width: 110px; text-align: center;" type="text" id="taiKhoanNo" value="${chungtuketchuyenchitiet.TaiKhoanNo}" readonly>`;
+                    cell4.innerHTML = `<input style="width: 110px; text-align: center;" type="text" id="taiKhoanCo" value="${chungtuketchuyenchitiet.TaiKhoanCo}" readonly>`;
+                    cell5.innerHTML = `<button type="button" onclick="updateChungTuChiTiet('${chungtuketchuyenchitiet.id}')">Cập nhật</button>`;
 
                     // Thêm sự kiện cho sự kiện click vào dòng
                     newRow.onclick = function() {
@@ -313,16 +295,11 @@
 
             //Thiết lập input
             txtngayChungTu.disabled = false;
-            txtngayHoaDon.disabled = false;
 
-            //Cho phép đổi khách hàng khác
-            replaceInputWithSelect();
         } else {
 
             txtngayChungTu.disabled = true;
-            txtngayHoaDon.disabled = true;
 
-            replaceSelectWithInput();
         }
     }
 
@@ -334,31 +311,20 @@
         btnCapNhat.disabled = true;
         btnTaoPhieu.disabled = false;
 
-        document.getElementById('thu').disabled = false;
-        document.getElementById('chi').disabled = false;
-
         //Thiết lập các input được phép nhập liệu
         txtsoChungTu.disabled = false;
         txtngayChungTu.disabled = false;
 
         //Làm mới bảng chính
-        $("tr[data-id='trChungTuNganHang'] td input#loaiChungTu").val("TG");
-        $("tr[data-id='trChungTuNganHang'] td input#soChungTu").val("");
-        $("tr[data-id='trChungTuNganHang'] td input#maChungTu").val("");
-        $("tr[data-id='trChungTuNganHang'] td input#ngayChungTu").val("");
-        $("tr[data-id='trChungTuNganHang'] td input#hoTen").val("");
-        $("tr[data-id='trChungTuNganHang'] td textarea#dienGiai").val("");
-        $("tr[data-id='trChungTuNganHang'] td input#maKhachHang").val("");
-        $("tr[data-id='trChungTuNganHang'] td input#tenKhachHang").val("");
-        $("tr[data-id='trChungTuNganHang'] td input#maSoThue").val("");
-        $("tr[data-id='trChungTuNganHang'] td input[name='thuChi']").prop('checked', false);
-        $("tr[data-id='trChungTuNganHang'] td input#id").val("");
+        $("tr[data-id='trChungTu'] td input#loaiChungTu").val("KC");
+        $("tr[data-id='trChungTu'] td input#soChungTu").val("");
+        $("tr[data-id='trChungTu'] td input#maChungTu").val("");
+        $("tr[data-id='trChungTu'] td input#ngayChungTu").val("");
+        $("tr[data-id='trChungTu'] td textarea#dienGiai").val("");
+        $("tr[data-id='trChungTu'] td input#id").val("");
 
         // Gọi hàm mở sẵn bảng phụ khi thêm mới
         addNewChungTuChiTiet();
-
-        // Thay thế thẻ input bằng thẻ select
-        replaceInputWithSelect();
 
     }
 
@@ -366,88 +332,9 @@
     function handleInputChange() {
         var txtloaiChungTu = document.getElementById("loaiChungTu").value;
         var txtsoChungTu = document.getElementById("soChungTu").value;
-        $("tr[data-id='trChungTuNganHang'] td input#maChungTu").val(txtloaiChungTu + "-" + txtsoChungTu);
+        $("tr[data-id='trChungTu'] td input#maChungTu").val(txtloaiChungTu + "-" + txtsoChungTu);
     }
 
-
-    // Hàm xử lý thay thế thẻ input thành select cho KHÁCH HÀNG NỢ
-    function replaceInputWithSelect() {
-        // Lấy giá trị hiện tại của thẻ input
-        var inputValue = document.getElementById("maKhachHang").value;
-
-        // Tạo một thẻ select
-        var selectElement = document.createElement("select");
-        selectElement.id = "maKhachHang";
-
-        selectElement.style.marginLeft = "5px";
-
-        // Fetch dữ liệu
-        fetch('get_KhachHang')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-
-                //Vào từng object chứa khách hàng
-                data.forEach(khachhang => {
-
-                    //Duyệt qua các thuộc tính của một khách hàng và tạo các option
-                    var option = document.createElement("option");
-                    option.value = khachhang.MaKhachHang;
-                    option.text = khachhang.MaKhachHang;
-                    selectElement.appendChild(option);
-
-                    // Đặt giá trị của thẻ select
-                    selectElement.value = inputValue;
-
-                    // Thay thế thẻ input bằng thẻ select
-                    var inputElement = document.getElementById("maKhachHang");
-                    inputElement.parentNode.replaceChild(selectElement, inputElement);
-
-
-                    // Thêm xử lý sự kiện change cho thẻ select
-                    selectElement.addEventListener("change", function() {
-                        var selectedValue = this.value;
-                        data.forEach(kh => {
-                            if (kh.MaKhachHang == selectedValue) {
-                                $("tr[data-id='trChungTuNganHang'] td input#tenKhachHang").val(kh.TenKhachHang);
-                                $("tr[data-id='trChungTuNganHang'] td input#maSoThue").val(kh.MaSoThue);
-                            }
-                        });
-                    });
-                });
-
-            })
-            .catch(error => {
-                // Xử lý lỗi
-                console.error('There was a problem with the fetch operation:', error);
-            });
-    }
-
-
-    //Hàm xử lý thẻ select maKhachHang thành thẻ input cho KHÁCH HÀNG NỢ
-    function replaceSelectWithInput() {
-        // Lấy giá trị hiện tại của thẻ select
-        var selectedValue = document.getElementById("maKhachHang").value;
-
-        // Tạo một thẻ input
-        var inputElement = document.createElement("input");
-        inputElement.type = "text";
-        inputElement.id = "maKhachHang";
-        inputElement.value = selectedValue;
-
-        // Thêm thuộc tính CSS vào thẻ input
-        inputElement.style.marginLeft = "5px";
-        inputElement.style.width = "80px";
-
-        // Thay thế thẻ select bằng thẻ input
-        var selectElement = document.getElementById("maKhachHang");
-        selectElement.parentNode.replaceChild(inputElement, selectElement);
-    }
 
     var isNewRow = false; // Biến để đánh dấu trạng thái
 
@@ -503,12 +390,7 @@
         var loaiChungTu = $("#loaiChungTu").val();
         var ngayChungTu = $("#ngayChungTu").val();
         var soChungTu = $("#soChungTu").val();
-        var hoTen = $("#hoTen").val();
         var dienGiai = $("#dienGiai").val();
-        var maKhachHang = $("#maKhachHang").val();
-        var tenKhachHang = $("#tenKhachHang").val();
-        var maSoThue = $("#maSoThue").val();
-        var thuChi = $('input[name="thuChi"]:checked').val();
 
         //Chi tiết 
         var dienGiaiChiTiet = $("#dienGiaiChiTiet").val();
@@ -520,12 +402,8 @@
         console.log(loaiChungTu);
         console.log(ngayChungTu);
         console.log(soChungTu);
-        console.log(hoTen);
         console.log(dienGiai);
-        console.log(maKhachHang);
-        console.log(tenKhachHang);
-        console.log(maSoThue);
-        console.log(thuChi);
+
         console.log(dienGiaiChiTiet);
         console.log(soTien);
         console.log(taiKhoanNo);
@@ -534,19 +412,14 @@
 
         $.ajax({
             method: 'POST',
-            url: "{{ route('chungtunganhang.store') }}",
+            url: "{{ route('chungtuketchuyen.store') }}",
             data: {
                 // Bảng chính
                 MaChungTu: maChungTu,
                 LoaiChungTu: loaiChungTu,
                 NgayChungTu: ngayChungTu,
                 SoChungTu: soChungTu,
-                HoTen: hoTen,
                 DienGiai: dienGiai,
-                MaKhachHang: maKhachHang,
-                TenKhachHang: tenKhachHang,
-                MaSoThue: maSoThue,
-                ThuChi: thuChi,
 
                 // Bảng phụ
                 //Mã chứng từ đã tồn tại ở bảng chính, chỉ việc sử dụng - MaChungTu
@@ -583,41 +456,25 @@
         //Phiếu xuất
         var id = $("#id").val();
         var ngayChungTu = $("#ngayChungTu").val();
-        var hoTen = $("#hoTen").val();
         var dienGiai = $("#dienGiai").val();
-        var maKhachHang = $("#maKhachHang").val();
-        var tenKhachHang = $("#tenKhachHang").val();
-        var maSoThue = $("#maSoThue").val();
-        var thuChi = $('input[name="thuChi"]:checked').val();
 
         console.log(id);
         console.log(ngayChungTu);
-        console.log(hoTen);
         console.log(dienGiai);
-        console.log(maKhachHang);
-        console.log(tenKhachHang);
-        console.log(maSoThue);
-        console.log(thuChi);
 
         $.ajax({
             method: 'PUT',
-            url: '/chungtunganhang_update/' + id,
+            url: '/chungtuketchuyen_update/' + id,
             data: {
 
                 NgayChungTu: ngayChungTu,
-                HoTen: hoTen,
-                DienGiai: dienGiai,
-                MaKhachHang: maKhachHang,
-                TenKhachHang: tenKhachHang,
-                MaSoThue: maSoThue,
-                ThuChi: thuChi
+                DienGiai: dienGiai
 
             },
             success: function(response) {
                 console.log(response);
                 // Xử lý phản hồi
                 toastr.success("Cập nhật thành công");
-
             },
             error: function(error) {
                 toastr.error("Lỗi cập nhật");
@@ -654,7 +511,7 @@
 
         $.ajax({
             method: 'PUT',
-            url: '/chungtunganhangchitiet_update/' + id,
+            url: '/chungtuketchuyenchitiet_update/' + id,
             data: {
 
                 DienGiaiChiTiet: dienGiaiChiTiet,
@@ -688,5 +545,3 @@
     }
 </script>
 @endsection
-
-<!-- Load các phiếu nhập theo ngày -->
