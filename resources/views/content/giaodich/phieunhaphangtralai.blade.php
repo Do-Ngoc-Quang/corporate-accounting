@@ -173,7 +173,10 @@
                                     <div class="input-col-10"><input readonly style="margin-left: 12px; width: 50px;" type="text" id="taiKhoanNoGTGT"></div>
                                 </div>
                                 <hr>
-
+                                <div class="row-col-10">
+                                    <div class="label-col-10">Biểu thuế:</div>
+                                    <div class="input-col-10"><input style="margin-left: 34px; width: 210px;" type="text" id="bieuThue"></div>
+                                </div>
                                 <div class="row-col-10">
                                     <div class="label-col-10">Mặt hàng:</div>
                                     <div class="input-col-10"><input style="margin-left: 34px; width: 210px;" type="text" id="matHang"></div>
@@ -311,6 +314,7 @@
                     $("tr[data-id='trChungTu'] td input#tenKhachHang").val(phieunhaphangtralai.TenKhachHang);
                     $("tr[data-id='trChungTu'] td input#maSoThue").val(phieunhaphangtralai.MaSoThue);
 
+                    $("tr[data-id='trChungTu'] td input#bieuThue").val(phieunhaphangtralai.BieuThue);
                     $("tr[data-id='trChungTu'] td input#matHang").val(phieunhaphangtralai.MatHang);
                     $("tr[data-id='trChungTu'] td input#soXeRy").val(phieunhaphangtralai.SoXeRy);
                     $("tr[data-id='trChungTu'] td input#soHoaDon").val(phieunhaphangtralai.SoHoaDon);
@@ -345,7 +349,7 @@
                 // Xóa toàn bộ nội dung trong tbody
                 tableBody.innerHTML = '';
 
-                data.forEach(phieuxuathanghoachitiet => {
+                data.forEach(phieunhaphangtralaichitiet => {
 
                     // Thêm dữ liệu mới vào tbody
                     var newRow = tableBody.insertRow(tableBody.rows.length);
@@ -360,14 +364,14 @@
                     var cell7 = newRow.insertCell(6);
                     var cell8 = newRow.insertCell(7);
 
-                    cell1.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="maHang" value="${phieuxuathanghoachitiet.MaHang}" readonly>`;
-                    cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${phieuxuathanghoachitiet.DonViTinh}">`;
-                    cell3.innerHTML = `<input style="width: 80px; text-align: center;" type="text" id="soLuong" value="${phieuxuathanghoachitiet.SoLuong}" oninput="ThueGTGT_InputChange()">`;
-                    cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${phieuxuathanghoachitiet.DonGiaVon}" oninput="ThueGTGT_InputChange()">`;
-                    cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" value="${phieuxuathanghoachitiet.ThanhTienGiaVon}" readonly>`;
-                    cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" value="${phieuxuathanghoachitiet.DonGiaBan}" oninput="ThueGTGT_InputChange()">`;
-                    cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" value="${phieuxuathanghoachitiet.ThanhTienGiaBan}" readonly>`;
-                    cell8.innerHTML = `<button style="width: 100px;" type="button" onclick="updateChungTuChiTiet( '${phieuxuathanghoachitiet.id}')">Cập nhật</button>`;
+                    cell1.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="maHang" value="${phieunhaphangtralaichitiet.MaHang}" readonly>`;
+                    cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${phieunhaphangtralaichitiet.DonViTinh}">`;
+                    cell3.innerHTML = `<input style="width: 80px; text-align: center;" type="text" id="soLuong" value="${phieunhaphangtralaichitiet.SoLuong}" oninput="ThueGTGT_InputChange()">`;
+                    cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${phieunhaphangtralaichitiet.DonGiaVon}" oninput="ThueGTGT_InputChange()">`;
+                    cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" value="${phieunhaphangtralaichitiet.ThanhTienGiaVon}" readonly>`;
+                    cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" value="${phieunhaphangtralaichitiet.DonGiaBan}" oninput="ThueGTGT_InputChange()">`;
+                    cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" value="${phieunhaphangtralaichitiet.ThanhTienGiaBan}" readonly>`;
+                    cell8.innerHTML = `<button style="width: 100px;" type="button" onclick="updateChungTuChiTiet( '${phieunhaphangtralaichitiet.id}')">Cập nhật</button>`;
 
                     // Thêm sự kiện cho sự kiện click vào dòng
                     newRow.onclick = function() {
@@ -435,6 +439,7 @@
         $("tr[data-id='trChungTu'] td input#tenKhachHang").val("");
         $("tr[data-id='trChungTu'] td input#maSoThue").val("");
 
+        $("tr[data-id='trPhieuThu'] td input#bieuThue").val("");
         $("tr[data-id='trChungTu'] td input#matHang").val("");
         $("tr[data-id='trChungTu'] td input#soXeRy").val("");
         $("tr[data-id='trChungTu'] td input#soHoaDon").val("");
@@ -524,7 +529,6 @@
                         });
                     });
                 });
-
             })
             .catch(error => {
                 // Xử lý lỗi
@@ -643,6 +647,7 @@
         var tenKhachHang = $("#tenKhachHang").val();
         var maSoThue = $("#maSoThue").val();
 
+        var bieuThue = $("#bieuThue").val();
         var matHang = $("#matHang").val();
         var soXeRy = $("#soXeRy").val();
         var soHoaDon = $("#soHoaDon").val();
@@ -680,6 +685,7 @@
                 TaiKhoanCoGiaBan: taiKhoanCoGiaBan,
                 TaiKhoanNoGTGT: taiKhoanNoGTGT,
 
+                BieuThue: bieuThue,
                 MatHang: matHang,
                 SoXeRy: soXeRy,
                 SoHoaDon: soHoaDon,
@@ -739,6 +745,7 @@
         var tenKhachHang = $("#tenKhachHang").val();
         var maSoThue = $("#maSoThue").val();
 
+        var bieuThue = $("#bieuThue").val();
         var matHang = $("#matHang").val();
         var soXeRy = $("#soXeRy").val();
         var soHoaDon = $("#soHoaDon").val();
@@ -763,6 +770,7 @@
                 TaiKhoanCoGiaBan: taiKhoanCoGiaBan,
                 TaiKhoanNoGTGT: taiKhoanNoGTGT,
 
+                BieuThue: bieuThue,
                 MatHang: matHang,
                 SoXeRy: soXeRy,
                 SoHoaDon: soHoaDon,

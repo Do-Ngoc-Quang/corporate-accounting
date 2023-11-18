@@ -48,6 +48,7 @@ class PhieuNhapHangTraLaiController extends Controller
                 'TaiKhoanCoGiaBan' => 'required',
                 'TaiKhoanNoGTGT' => 'required',
 
+                'BieuThue' => 'required',
                 'MatHang' => 'required',
                 'SoXeRy' => 'required',
                 'SoHoaDon' => 'required',
@@ -89,6 +90,7 @@ class PhieuNhapHangTraLaiController extends Controller
                 'TaiKhoanCoGiaBan' => $request->TaiKhoanCoGiaBan,
                 'TaiKhoanNoGTGT' => $request->TaiKhoanNoGTGT,
 
+                'BieuThue' => $request->BieuThue,
                 'MatHang' => $request->MatHang,
                 'SoXeRy' => $request->SoXeRy,
                 'SoHoaDon' => $request->SoHoaDon,
@@ -252,6 +254,7 @@ class PhieuNhapHangTraLaiController extends Controller
                 'TaiKhoanCoGiaBan' => $request->TaiKhoanCoGiaBan,
                 'TaiKhoanNoGTGT' => $request->TaiKhoanNoGTGT,
 
+                'BieuThue' => $request->BieuThue,
                 'MatHang' => $request->MatHang,
                 'SoXeRy' => $request->SoXeRy,
                 'SoHoaDon' => $request->SoHoaDon,

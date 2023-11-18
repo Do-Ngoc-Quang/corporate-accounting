@@ -22,6 +22,7 @@
         border: 1px solid #333;
         max-height: 100%;
         overflow-y: auto;
+        /* border-bottom: none; */
     }
 
     #section2 {
@@ -52,6 +53,7 @@
         background-color: #d2f9f7;
     }
 
+
     #dataTable {
         width: 100%;
     }
@@ -64,6 +66,7 @@
     .row-col-10 {
         display: flex;
         margin-bottom: 9px;
+        /* Khoảng cách giữa các dòng */
     }
 </style>
 @section('content')
@@ -73,7 +76,7 @@
 
     <!-- Khung hiển thị thông tin bên phải -->
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content-main" id="main-content-subform">
-        <h6 style="text-align:center; color: red;">PHIẾU XUẤT HÀNG HÓA</h6>
+        <h6 style="text-align:center; color: red;">PHIẾU XUẤT HÀNG TRẢ LẠI</h6>
         <div class="row" id="section1">
             <!-- Phần trái chiếm 1 col -->
             <div class="col-2" style="border-right: 1px solid #ccc; margin-top: 0px; padding-top: 0px">
@@ -81,13 +84,13 @@
                     <table class="custom-table-showID" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th>Mã phiếu xuất</th>
+                                <th>Mã chứng từ</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($phieuxuathanghoa as $phieuxuat)
-                            <tr onclick="highlightRowandCollect(`<?= $phieuxuat->MaChungTu ?>`, this)">
-                                <td><input style="width: 100%; text-align: center;" readonly type="text" id="MaChungTu" value="{{ $phieuxuat->MaChungTu }}"></td>
+                            @foreach($phieuxuathangtralai as $phieuxuattralai)
+                            <tr onclick="highlightRowandCollect(`<?= $phieuxuattralai->MaChungTu ?>`, this)">
+                                <td><input style="width: 100%; text-align: center;" readonly type="text" id="MaChungTu" value="{{ $phieuxuattralai->MaChungTu }}"></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -101,7 +104,7 @@
             <div class="col-10">
                 <table class="custom-table" id="dataTable">
                     <tbody>
-                        <tr data-id="trPhieuXuatHangHoa">
+                        <tr data-id="trChungTu">
                             <td>
                                 <div class="row-col-10">
                                     <div class="label-col-10">Loại chứng từ:</div>
@@ -125,40 +128,6 @@
                                     <div class="input-col-10"><textarea style="margin-left: 42px;" id="dienGiai" cols="35" rows="2"></textarea></div>
                                 </div>
                                 <hr>
-
-                                <div class="row-col-10">
-                                    <div class="label-col-10">Tài khoản nợ giá vốn:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 1px; width: 50px;" type="text" id="taiKhoanNoGiaVon"></div>
-
-                                    <div class="label-col-10" style="margin-left: 50px;">Tài khoản có giá vốn:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 1px; width: 50px;" type="text" id="taiKhoanCoGiaVon"></div>
-                                </div>
-                                <div class="row-col-10">
-                                    <div class="label-col-10">Tài khoản nợ giá bán:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 0px; width: 50px;" type="text" id="taiKhoanNoGiaBan"></div>
-
-                                    <div class="label-col-10" style="margin-left: 50px;">Tài khoản có giá bán:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 0px; width: 50px;" type="text" id="taiKhoanCoGiaBan"></div>
-                                </div>
-                                <div class="row-col-10">
-                                    <div class="label-col-10" style="margin-left: 262px;">Tài khoản có GTGT:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 12px; width: 50px;" type="text" id="taiKhoanCoGTGT"></div>
-                                </div>
-
-                                <hr>
-
-                                <div style="margin: 0;">
-                                    <div>
-                                        <label style="margin: 0 5px 10px 0;" for="edit">Chỉnh sửa</label><input type="checkbox" id="edit" onchange="choPhepChinhSua()">
-                                    </div>
-                                    <div>
-                                        <input type="hidden" id="id">
-                                    </div>
-                                    <label></label>
-                                </div>
-                            </td>
-
-                            <td>
                                 <div class="row-col-10">
                                     <div class="label-col-10">Mã khách hàng:</div>
                                     <div class="input-col-10"><input style="margin-left: 5px; width: 80px;" type="text" id="maKhachHang"></div>
@@ -172,7 +141,42 @@
                                     <div class="input-col-10"><input style="margin-left: 33px; width: 250px;" type="text" id="maSoThue" readonly></div>
                                 </div>
                                 <hr>
+                                <div style="margin: 0;">
+                                    <div>
+                                        <label style="margin: 0 5px 10px 0;" for="edit">Chỉnh sửa</label><input type="checkbox" id="edit" onchange="choPhepChinhSua()">
+                                    </div>
 
+                                    <div>
+                                        <input type="hidden" id="id">
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>
+                            <div class="row-col-10">
+                                    <div class="label-col-10">Tài khoản nợ giá vốn:</div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 1px; width: 50px;" type="text" id="taiKhoanNoGiaVon"></div>
+
+                                    <div class="label-col-10" style="margin-left: 50px;">Tài khoản có giá vốn:</div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 1px; width: 50px;" type="text" id="taiKhoanCoGiaVon"></div>
+                                </div>
+                                <div class="row-col-10">
+                                    <div class="label-col-10">Tài khoản nợ giá mua:</div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 0px; width: 50px;" type="text" id="taiKhoanNoGiaMua"></div>
+
+                                    <div class="label-col-10" style="margin-left: 50px;">Tài khoản có giá mua:</div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 0px; width: 50px;" type="text" id="taiKhoanCoGiaMua"></div>
+                                </div>
+                                <div class="row-col-10">
+                                    <div class="label-col-10" style="margin-left: 262px;">Tài khoản nợ GTGT:</div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 12px; width: 50px;" type="text" id="taiKhoanCoGTGT"></div>
+                                </div>
+                                <hr>
+                                <div class="row-col-10">
+                                    <div class="label-col-10">Biểu thuế:</div>
+                                    <div class="input-col-10"><input style="margin-left: 34px; width: 210px;" type="text" id="bieuThue"></div>
+                                </div>
                                 <div class="row-col-10">
                                     <div class="label-col-10">Mặt hàng:</div>
                                     <div class="input-col-10"><input style="margin-left: 34px; width: 210px;" type="text" id="matHang"></div>
@@ -198,13 +202,14 @@
                                     <div class="label-col-10">Thuế GTGT:</div>
                                     <div class="input-col-10"><input style="margin-left: 18px; width: 210px;" type="text" id="thueGTGT" readonly></div>
                                 </div>
+
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div id="section1-2">
-                    <button class="btnAddnew" style="margin: 10px 30px 0 20px; width: 30%;" type="button" onclick="addNewPhieuXuatHangHoa()" id="btnTaoPhieu">Tạo phiếu nhập</button>
-                    <button class="btnAddnew" style="margin: 10px 30px 0 20px; width: 30%;" type="button" onclick="updatePhieuXuatHangHoa()" id="btnCapNhat" disabled>Cập nhật</button>
+                    <button class="btnAddnew" style="margin: 10px 30px 0 20px; width: 30%;" type="button" onclick="addNewChungTu()" id="btnTaoPhieu">Tạo phiếu nhập</button>
+                    <button class="btnAddnew" style="margin: 10px 30px 0 20px; width: 30%;" type="button" onclick="updateChungTu()" id="btnCapNhat" disabled>Cập nhật</button>
                     <button class="btnAddnew" style="margin: 10px 30px 0 20px; width: 20%;" type="button" onclick="resetAndSetupValue()" id="btnLamMoi">Làm mới</button>
 
                 </div>
@@ -212,13 +217,13 @@
         </div>
 
         <div id="section2">
-            <!-- <h6 style="text-align:center; color: red;">CHI TIẾT PHIẾU XUẤT</h6> -->
+            <!-- <h6 style="text-align:center; color: red;"></h6> -->
             <table class="custom-table" data-id="dataTableChiTiet" id="dataTableChiTiet">
                 <thead>
                     <tr>
-                        <th style="width: 100px;">Mã hàng</th>
+                    <th style="width: 100px;">Mã hàng</th>
                         <th style="width: 90px;">Đơn vị tính</th>
-                        <th style="width: 80px;">Số lượng</th>
+                        <th style="width: 100px;">Số lượng</th>
                         <th style="width: 150px;">Đơn giá vốn</th>
                         <th style="width: 150px;">Thành tiền giá vốn</th>
                         <th style="width: 150px;">Đơn giá bán</th>
@@ -282,7 +287,7 @@
         row.classList.add("highlight");
 
         // Xử lý hiện thị bảng chính
-        fetch('phieuxuathanghoa/' + machungtu)
+        fetch('phieuxuathangtralai/' + machungtu)
 
             .then(response => {
                 if (!response.ok) {
@@ -293,32 +298,32 @@
             .then(data => {
 
                 //Đoạn code dưới đây thực thi sự cập nhật, tức hiển thị dữ liệu tức thì mà không tải lại trang
-                data.forEach(phieuxuathanghoa => {
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#loaiChungTu").val(phieuxuathanghoa.LoaiChungTu);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#soChungTu").val(phieuxuathanghoa.SoChungTu);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#maChungTu").val(phieuxuathanghoa.MaChungTu);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#ngayChungTu").val(phieuxuathanghoa.NgayChungTu);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td textarea#dienGiai").val(phieuxuathanghoa.DienGiai);
+                data.forEach(phieuxuathangtralai => {
+                    $("tr[data-id='trChungTu'] td input#loaiChungTu").val(phieuxuathangtralai.LoaiChungTu);
+                    $("tr[data-id='trChungTu'] td input#soChungTu").val(phieuxuathangtralai.SoChungTu);
+                    $("tr[data-id='trChungTu'] td input#maChungTu").val(phieuxuathangtralai.MaChungTu);
+                    $("tr[data-id='trChungTu'] td input#ngayChungTu").val(phieuxuathangtralai.NgayChungTu);
+                    $("tr[data-id='trChungTu'] td textarea#dienGiai").val(phieuxuathangtralai.DienGiai);
 
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanNoGiaVon").val(phieuxuathanghoa.TaiKhoanNoGiaVon);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanCoGiaVon").val(phieuxuathanghoa.TaiKhoanCoGiaVon);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanNoGiaBan").val(phieuxuathanghoa.TaiKhoanNoGiaBan);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanCoGiaBan").val(phieuxuathanghoa.TaiKhoanCoGiaBan);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanCoGTGT").val(phieuxuathanghoa.TaiKhoanCoGTGT);
+                    $("tr[data-id='trChungTu'] td input#taiKhoanNoGiaVon").val(phieuxuathangtralai.TaiKhoanNoGiaVon);
+                    $("tr[data-id='trChungTu'] td input#taiKhoanCoGiaVon").val(phieuxuathangtralai.TaiKhoanCoGiaVon);
+                    $("tr[data-id='trChungTu'] td input#taiKhoanNoGiaMua").val(phieuxuathangtralai.TaiKhoanNoGiaMua);
+                    $("tr[data-id='trChungTu'] td input#taiKhoanCoGiaMua").val(phieuxuathangtralai.TaiKhoanCoGiaMua);
+                    $("tr[data-id='trChungTu'] td input#taiKhoanCoGTGT").val(phieuxuathangtralai.TaiKhoanCoGTGT);
 
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#maKhachHang").val(phieuxuathanghoa.MaKhachHang);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#tenKhachHang").val(phieuxuathanghoa.TenKhachHang);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#maSoThue").val(phieuxuathanghoa.MaSoThue);
+                    $("tr[data-id='trChungTu'] td input#maKhachHang").val(phieuxuathangtralai.MaKhachHang);
+                    $("tr[data-id='trChungTu'] td input#tenKhachHang").val(phieuxuathangtralai.TenKhachHang);
+                    $("tr[data-id='trChungTu'] td input#maSoThue").val(phieuxuathangtralai.MaSoThue);
 
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#matHang").val(phieuxuathanghoa.MatHang);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#soXeRy").val(phieuxuathanghoa.SoXeRy);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#soHoaDon").val(phieuxuathanghoa.SoHoaDon);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#ngayHoaDon").val(phieuxuathanghoa.NgayHoaDon);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#thueSuat").val(phieuxuathanghoa.ThueSuat);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#thueGTGT").val(phieuxuathanghoa.ThueGTGT);
+                    $("tr[data-id='trChungTu'] td input#bieuThue").val(phieuxuathangtralai.BieuThue);
+                    $("tr[data-id='trChungTu'] td input#matHang").val(phieuxuathangtralai.MatHang);
+                    $("tr[data-id='trChungTu'] td input#soXeRy").val(phieuxuathangtralai.SoXeRy);
+                    $("tr[data-id='trChungTu'] td input#soHoaDon").val(phieuxuathangtralai.SoHoaDon);
+                    $("tr[data-id='trChungTu'] td input#ngayHoaDon").val(phieuxuathangtralai.NgayHoaDon);
+                    $("tr[data-id='trChungTu'] td input#thueSuat").val(phieuxuathangtralai.ThueSuat);
+                    $("tr[data-id='trChungTu'] td input#thueGTGT").val(phieuxuathangtralai.ThueGTGT);
 
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#id").val(phieuxuathanghoa.id);
-
+                    $("tr[data-id='trChungTu'] td input#id").val(phieuxuathangtralai.id);
                 });
             })
             .catch(error => {
@@ -328,7 +333,7 @@
 
 
         // Xử lý hiện thị bảng chi tiết (phụ)
-        fetch('phieuxuathanghoachitiet/' + machungtu)
+        fetch('phieuxuathangtralaichitiet/' + machungtu)
 
             .then(response => {
                 if (!response.ok) {
@@ -344,7 +349,7 @@
                 // Xóa toàn bộ nội dung trong tbody
                 tableBody.innerHTML = '';
 
-                data.forEach(phieuxuathanghoachitiet => {
+                data.forEach(phieuxuathangtralaichitiet => {
 
                     // Thêm dữ liệu mới vào tbody
                     var newRow = tableBody.insertRow(tableBody.rows.length);
@@ -360,15 +365,15 @@
                     var cell8 = newRow.insertCell(7);
                     var cell9 = newRow.insertCell(8);
 
-                    cell1.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="maHang" value="${phieuxuathanghoachitiet.MaHang}" readonly>`;
-                    cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${phieuxuathanghoachitiet.DonViTinh}">`;
-                    cell3.innerHTML = `<input style="width: 80px; text-align: center;" type="text" id="soLuong" value="${phieuxuathanghoachitiet.SoLuong}" oninput="ThueGTGT_InputChange()">`;
-                    cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${phieuxuathanghoachitiet.DonGiaVon}" oninput="ThueGTGT_InputChange()">`;
-                    cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" value="${phieuxuathanghoachitiet.ThanhTienGiaVon}" readonly>`;
-                    cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" value="${phieuxuathanghoachitiet.DonGiaBan}" oninput="ThueGTGT_InputChange()">`;
-                    cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" value="${phieuxuathanghoachitiet.ThanhTienGiaBan}" readonly>`;
-                    cell8.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="maChungTuNhap" value="${phieuxuathanghoachitiet.MaChungTuNhap}" readonly>`;
-                    cell9.innerHTML = `<button style="width: 100px;" type="button" onclick="updatePhieuXuatHangHoaChiTiet( '${phieuxuathanghoachitiet.id}')">Cập nhật</button>`;
+                    cell1.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="maHang" value="${phieuxuathangtralaichitiet.MaHang}" readonly>`;
+                    cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${phieuxuathangtralaichitiet.DonViTinh}">`;
+                    cell3.innerHTML = `<input style="width: 80px; text-align: center;" type="text" id="soLuong" value="${phieuxuathangtralaichitiet.SoLuong}" oninput="ThueGTGT_InputChange()">`;
+                    cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${phieuxuathangtralaichitiet.DonGiaVon}" oninput="ThueGTGT_InputChange()">`;
+                    cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" value="${phieuxuathangtralaichitiet.ThanhTienGiaVon}" readonly>`;
+                    cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaMua" value="${phieuxuathangtralaichitiet.DonGiaMua}" oninput="ThueGTGT_InputChange()">`;
+                    cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaMua" value="${phieuxuathangtralaichitiet.ThanhTienGiaMua}" readonly>`;
+                    cell8.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="maChungTuNhap" value="${phieuxuathangtralaichitiet.MaChungTuNhap}" readonly>`;
+                    cell9.innerHTML = `<button style="width: 100px;" type="button" onclick="updateChungTuChiTiet( '${phieuxuathangtralaichitiet.id}')">Cập nhật</button>`;
 
                     // Thêm sự kiện cho sự kiện click vào dòng
                     newRow.onclick = function() {
@@ -381,7 +386,6 @@
                 // Handle errors
                 console.error('There was a problem with the fetch operation:', error);
             });
-
     }
 
     //Hàm xử lý cho phép chỉnh sửa phiếu chi
@@ -415,42 +419,40 @@
         btnCapNhat.disabled = true;
         btnTaoPhieu.disabled = false;
 
-        //Thiết lập thẻ input ẩn đi
-        // txtmaChungTu.disabled = true;
-
         //Thiết lập các input được phép nhập liệu
         txtsoChungTu.disabled = false;
         txtngayChungTu.disabled = false;
         txtngayHoaDon.disabled = false;
 
         //Làm mới bảng chính
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#loaiChungTu").val("XH");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#soChungTu").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#maChungTu").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#ngayChungTu").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td textarea#dienGiai").val("");
+        $("tr[data-id='trChungTu'] td input#loaiChungTu").val("XT");
+        $("tr[data-id='trChungTu'] td input#soChungTu").val("");
+        $("tr[data-id='trChungTu'] td input#maChungTu").val("");
+        $("tr[data-id='trChungTu'] td input#ngayChungTu").val("");
+        $("tr[data-id='trChungTu'] td textarea#dienGiai").val("");
 
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanNoGiaVon").val("632");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanCoGiaVon").val("156");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanNoGiaBan").val("131");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanCoGiaBan").val("511");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#taiKhoanCoGTGT").val("3331");
+        $("tr[data-id='trChungTu'] td input#taiKhoanNoGiaVon").val("632");
+        $("tr[data-id='trChungTu'] td input#taiKhoanCoGiaVon").val("156");
+        $("tr[data-id='trChungTu'] td input#taiKhoanNoGiaMua").val("131");
+        $("tr[data-id='trChungTu'] td input#taiKhoanCoGiaMua").val("511");
+        $("tr[data-id='trChungTu'] td input#taiKhoanCoGTGT").val("3331");
 
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#maKhachHang").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#tenKhachHang").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#maSoThue").val("");
+        $("tr[data-id='trChungTu'] td input#maKhachHang").val("");
+        $("tr[data-id='trChungTu'] td input#tenKhachHang").val("");
+        $("tr[data-id='trChungTu'] td input#maSoThue").val("");
 
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#matHang").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#soXeRy").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#soHoaDon").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#ngayHoaDon").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#thueSuat").val("");
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#thueGTGT").val("");
+        $("tr[data-id='trChungTu'] td input#bieuThue").val("");
+        $("tr[data-id='trChungTu'] td input#matHang").val("");
+        $("tr[data-id='trChungTu'] td input#soXeRy").val("");
+        $("tr[data-id='trChungTu'] td input#soHoaDon").val("");
+        $("tr[data-id='trChungTu'] td input#ngayHoaDon").val("");
+        $("tr[data-id='trChungTu'] td input#thueSuat").val("");
+        $("tr[data-id='trChungTu'] td input#thueGTGT").val("");
 
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#id").val("");
+        $("tr[data-id='trChungTu'] td input#id").val("");
 
         // Gọi hàm mở sẵn bảng phụ khi thêm mới
-        addNewPhieuXuatHangHoaChiTiet();
+        addNewChungTuChiTiet();
 
         // Thay thế thẻ input bằng thẻ select
         replaceInputWithSelect();
@@ -461,7 +463,7 @@
     function handleInputChange() {
         var txtloaiChungTu = document.getElementById("loaiChungTu").value;
         var txtsoChungTu = document.getElementById("soChungTu").value;
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#maChungTu").val(txtloaiChungTu + "-" + txtsoChungTu);
+        $("tr[data-id='trChungTu'] td input#maChungTu").val(txtloaiChungTu + "-" + txtsoChungTu);
     }
 
     // Hàm xử lý tính toán tự động Thuế GTGT
@@ -471,14 +473,13 @@
 
         var soLuong = parseFloat(document.getElementById("soLuong").value);
         var donGiaVon = parseFloat(document.getElementById("donGiaVon").value);
-        var donGiaBan = parseFloat(document.getElementById("donGiaBan").value);
+        var donGiaMua = parseFloat(document.getElementById("donGiaMua").value);
 
         $("input#thanhTienGiaVon").val(soLuong * donGiaVon);
-        $("input#thanhTienGiaBan").val(soLuong * donGiaBan);
-        $("tr[data-id='trPhieuXuatHangHoa'] td input#thueGTGT").val((soLuong * donGiaBan) / thueSuat);
+        $("input#thanhTienGiaMua").val(soLuong * donGiaMua);
+        $("tr[data-id='trChungTu'] td input#thueGTGT").val((soLuong * donGiaMua) / thueSuat);
 
     }
-
 
     // Hàm xử lý thay thế thẻ input thành select 
     function replaceInputWithSelect() {
@@ -524,13 +525,12 @@
                         var selectedValue = this.value;
                         data.forEach(kh => {
                             if (kh.MaKhachHang == selectedValue) {
-                                $("tr[data-id='trPhieuXuatHangHoa'] td input#tenKhachHang").val(kh.TenKhachHang);
-                                $("tr[data-id='trPhieuXuatHangHoa'] td input#maSoThue").val(kh.MaSoThue);
+                                $("tr[data-id='trChungTu'] td input#tenKhachHang").val(kh.TenKhachHang);
+                                $("tr[data-id='trChungTu'] td input#maSoThue").val(kh.MaSoThue);
                             }
                         });
                     });
                 });
-
             })
             .catch(error => {
                 // Xử lý lỗi
@@ -559,7 +559,6 @@
         selectElement.parentNode.replaceChild(inputElement, selectElement);
     }
 
-
     var isNewRow = false; // Biến để đánh dấu trạng thái
 
     //Hàm xử lý xóa các thẻ có id là dataTableChiTiet trước khi nhập mới
@@ -574,7 +573,7 @@
     }
 
     //Tạo không gian nhập liệu bảng chi tiết (phụ)
-    function addNewPhieuXuatHangHoaChiTiet() {
+    function addNewChungTuChiTiet() {
 
         //Xóa các thẻ <tr> đang tồn tại trong dataTableChiTiet
         removePreviousRows();
@@ -582,9 +581,6 @@
         if (!isNewRow) {
             var tableBody = document.getElementById("dataTableChiTiet").getElementsByTagName("tbody")[0];
             var newRow = tableBody.insertRow(tableBody.rows.length);
-
-            // Gán giá trị cho thuộc tính data-id
-            // newRow.setAttribute('data-id', 'dataTableChiTiet');
 
             var cell1 = newRow.insertCell(0);
             var cell2 = newRow.insertCell(1);
@@ -594,8 +590,6 @@
             var cell6 = newRow.insertCell(5);
             var cell7 = newRow.insertCell(6);
             var cell8 = newRow.insertCell(7);
-            var cell9 = newRow.insertCell(8);
-            // var cell10 = newRow.insertCell(9);
 
             // Liệt kê danh sách mã hàng hóa cho khách hàng lựa chọn
             fetch('get_HangHoa')
@@ -623,9 +617,8 @@
             cell3.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="soLuong" placeholder="Số lượng" oninput="ThueGTGT_InputChange()">`;
             cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" placeholder="Đơn giá vốn" oninput="ThueGTGT_InputChange()">`;
             cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" readonly>`;
-            cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" placeholder="Đơn giá bán" oninput="ThueGTGT_InputChange()">`;
-            cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" readonly>`;
-            // cell8.innerHTML = `<input style=" text-align: center;" type="text" id="maChungTuNhap" placeholder="Mã chứng từ nhập">`;
+            cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaMua" placeholder="Đơn giá bán" oninput="ThueGTGT_InputChange()">`;
+            cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaMua" readonly>`;
 
             // Liệt kê danh sách mã chứng từ nhập hàng
             fetch('get_PhieuNhapHang')
@@ -649,8 +642,6 @@
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
-            // cell9.innerHTML = `<label></label>`;
-
             // Gán sự kiện click cho dòng mới
             newRow.onclick = function() {
                 highlightRow(this);
@@ -662,7 +653,7 @@
 
     // ----------------------------------------------------------------------------------------------------------------------------------------------------- //
     // Hàm xử lý thêm mới Phiếu chính (bảng chính)
-    function addNewPhieuXuatHangHoa() {
+    function addNewChungTu() {
 
         //Phiếu xuất
         var maChungTu = $("#maChungTu").val();
@@ -673,14 +664,15 @@
 
         var taiKhoanNoGiaVon = $("#taiKhoanNoGiaVon").val();
         var taiKhoanCoGiaVon = $("#taiKhoanCoGiaVon").val();
-        var taiKhoanNoGiaBan = $("#taiKhoanNoGiaBan").val();
-        var taiKhoanCoGiaBan = $("#taiKhoanCoGiaBan").val();
+        var taiKhoanNoGiaMua = $("#taiKhoanNoGiaMua").val();
+        var taiKhoanCoGiaMua = $("#taiKhoanCoGiaMua").val();
         var taiKhoanCoGTGT = $("#taiKhoanCoGTGT").val();
 
         var maKhachHang = $("#maKhachHang").val();
         var tenKhachHang = $("#tenKhachHang").val();
         var maSoThue = $("#maSoThue").val();
 
+        var bieuThue = $("#bieuThue").val();
         var matHang = $("#matHang").val();
         var soXeRy = $("#soXeRy").val();
         var soHoaDon = $("#soHoaDon").val();
@@ -692,16 +684,15 @@
         var maHang = $("#maHang").val();
         var donViTinh = $("#donViTinh").val();
         var soLuong = $("#soLuong").val();
-
         var donGiaVon = $("#donGiaVon").val();
         var thanhTienGiaVon = $("#thanhTienGiaVon").val();
-        var donGiaBan = $("#donGiaBan").val();
-        var thanhTienGiaBan = $("#thanhTienGiaBan").val();
+        var donGiaMua = $("#donGiaMua").val();
+        var thanhTienGiaMua = $("#thanhTienGiaMua").val();
         var maChungTuNhap = $("#maChungTuNhap").val();
 
         $.ajax({
             method: 'POST',
-            url: "{{ route('phieuxuathanghoa.store') }}",
+            url: "{{ route('phieuxuathangtralai.store') }}",
             data: {
                 // Bảng chính
                 MaChungTu: maChungTu,
@@ -716,10 +707,11 @@
 
                 TaiKhoanNoGiaVon: taiKhoanNoGiaVon,
                 TaiKhoanCoGiaVon: taiKhoanCoGiaVon,
-                TaiKhoanNoGiaBan: taiKhoanNoGiaBan,
-                TaiKhoanCoGiaBan: taiKhoanCoGiaBan,
+                TaiKhoanNoGiaMua: taiKhoanNoGiaMua,
+                TaiKhoanCoGiaMua: taiKhoanCoGiaMua,
                 TaiKhoanCoGTGT: taiKhoanCoGTGT,
 
+                BieuThue: bieuThue,
                 MatHang: matHang,
                 SoXeRy: soXeRy,
                 SoHoaDon: soHoaDon,
@@ -736,9 +728,9 @@
 
                 DonGiaVon: donGiaVon,
                 ThanhTienGiaVon: thanhTienGiaVon,
-                DonGiaBan: donGiaBan,
-                ThanhTienGiaBan: thanhTienGiaBan,
-                MaChungTuNhap: maChungTuNhap
+                DonGiaMua: donGiaMua,
+                ThanhTienGiaMua: thanhTienGiaMua,
+                MaChungTuNhap: maChungTuNhap,
             },
             success: function(response) {
                 if (response.error) {
@@ -763,26 +755,24 @@
 
 
     // Hàm xử lý cập nhật Phiếu chính (bảng chính)
-    function updatePhieuXuatHangHoa() {
+    function updateChungTu() {
 
         //Phiếu xuất
         var id = $("#id").val();
-        // var maChungTu = $("#maChungTu").val();
-        // var loaiChungTu = $("#loaiChungTu").val();
         var ngayChungTu = $("#ngayChungTu").val();
-        // var soChungTu = $("#soChungTu").val();
         var dienGiai = $("#dienGiai").val();
 
         var taiKhoanNoGiaVon = $("#taiKhoanNoGiaVon").val();
         var taiKhoanCoGiaVon = $("#taiKhoanCoGiaVon").val();
-        var taiKhoanNoGiaBan = $("#taiKhoanNoGiaBan").val();
-        var taiKhoanCoGiaBan = $("#taiKhoanCoGiaBan").val();
+        var taiKhoanNoGiaMua = $("#taiKhoanNoGiaMua").val();
+        var taiKhoanCoGiaMua = $("#taiKhoanCoGiaMua").val();
         var taiKhoanCoGTGT = $("#taiKhoanCoGTGT").val();
 
         var maKhachHang = $("#maKhachHang").val();
         var tenKhachHang = $("#tenKhachHang").val();
         var maSoThue = $("#maSoThue").val();
 
+        var bieuThue = $("#bieuThue").val();
         var matHang = $("#matHang").val();
         var soXeRy = $("#soXeRy").val();
         var soHoaDon = $("#soHoaDon").val();
@@ -792,12 +782,9 @@
 
         $.ajax({
             method: 'PUT',
-            url: '/phieuxuathanghoa_update/' + id,
+            url: '/phieuxuathangtralai_update/' + id,
             data: {
-                // MaChungTu: maChungTu,
-                // LoaiChungTu: loaiChungTu,
                 NgayChungTu: ngayChungTu,
-                // SoChungTu: soChungTu,
                 DienGiai: dienGiai,
 
                 MaKhachHang: maKhachHang,
@@ -806,10 +793,11 @@
 
                 TaiKhoanNoGiaVon: taiKhoanNoGiaVon,
                 TaiKhoanCoGiaVon: taiKhoanCoGiaVon,
-                TaiKhoanNoGiaBan: taiKhoanNoGiaBan,
-                TaiKhoanCoGiaBan: taiKhoanCoGiaBan,
+                TaiKhoanNoGiaMua: taiKhoanNoGiaMua,
+                TaiKhoanCoGiaMua: taiKhoanCoGiaMua,
                 TaiKhoanCoGTGT: taiKhoanCoGTGT,
 
+                BieuThue: bieuThue,
                 MatHang: matHang,
                 SoXeRy: soXeRy,
                 SoHoaDon: soHoaDon,
@@ -833,7 +821,7 @@
 
     // ------------------------------------------------------------------------------------------------------------------------------------------------------//
     //Hàm xử lý cập nhật (bảng phụ)
-    function updatePhieuXuatHangHoaChiTiet(id) {
+    function updateChungTuChiTiet(id) {
 
         var maHang = $("#maHang").val();
         var donViTinh = $("#donViTinh").val();
@@ -841,31 +829,22 @@
 
         var donGiaVon = $("#donGiaVon").val();
         var thanhTienGiaVon = $("#thanhTienGiaVon").val();
-        var donGiaBan = $("#donGiaBan").val();
-        var thanhTienGiaBan = $("#thanhTienGiaBan").val();
+        var donGiaMua = $("#donGiaMua").val();
+        var thanhTienGiaMua = $("#thanhTienGiaMua").val();
         var maChungTuNhap = $("#maChungTuNhap").val();
 
         //Lấy thông tin để cập nhật Thuế GTGT
-        var id_phieuxuathanghoa = $("#id").val();
+        // var id_phieuxuathanghoa = $("#id").val();
         var taiKhoanNoGiaVon = $("#taiKhoanNoGiaVon").val();
         var taiKhoanCoGiaVon = $("#taiKhoanCoGiaVon").val();
         var taiKhoanNoGiaBan = $("#taiKhoanNoGiaBan").val();
         var taiKhoanCoGiaBan = $("#taiKhoanCoGiaBan").val();
-        var taiKhoanCoGTGT = $("#taiKhoanCoGTGT").val();
+        var taiKhoanNoGTGT = $("#taiKhoanNoGTGT").val();
         var thueGTGT = $("#thueGTGT").val();
-
-        // console.log(id_phieuxuathanghoa);
-        // console.log(taiKhoanNoGiaVon);
-        // console.log(taiKhoanCoGiaVon);
-        // console.log(taiKhoanNoGiaBan);
-        // console.log(taiKhoanCoGiaBan);
-        // console.log(taiKhoanCoGTGT);
-        // console.log(thueGTGT);
-
 
         $.ajax({
             method: 'PUT',
-            url: '/phieuxuathanghoachitiet_update/' + id,
+            url: '/phieuxuathangtralaichitiet_update/' + id,
             data: {
                 MaHang: maHang,
                 DonViTinh: donViTinh,
@@ -873,18 +852,18 @@
 
                 DonGiaVon: donGiaVon,
                 ThanhTienGiaVon: thanhTienGiaVon,
-                DonGiaBan: donGiaBan,
-                ThanhTienGiaBan: thanhTienGiaBan,
+                DonGiaMua: donGiaMua,
+                ThanhTienGiaMua: thanhTienGiaMua,
                 MaChungTuNhap: maChungTuNhap,
 
-                //Gửi Thuế GTGT để cập nhật
-                Id_phieuxuathanghoa: id_phieuxuathanghoa,
-                TaiKhoanNoGiaVon: taiKhoanNoGiaVon,
-                TaiKhoanCoGiaVon: taiKhoanCoGiaVon,
-                TaiKhoanNoGiaBan: taiKhoanNoGiaBan,
-                TaiKhoanCoGiaBan: taiKhoanCoGiaBan,
-                TaiKhoanCoGTGT: taiKhoanCoGTGT,
-                ThueGTGT: thueGTGT
+                // //Gửi Thuế GTGT để cập nhật
+                // // Id_phieuxuathanghoa: id_phieuxuathanghoa,
+                // TaiKhoanNoGiaVon: taiKhoanNoGiaVon,
+                // TaiKhoanCoGiaVon: taiKhoanCoGiaVon,
+                // TaiKhoanNoGiaBan: taiKhoanNoGiaBan,
+                // TaiKhoanCoGiaBan: taiKhoanCoGiaBan,
+                // TaiKhoanNoGTGT: taiKhoanNoGTGT,
+                // ThueGTGT: thueGTGT
             },
             success: function(response) {
                 console.log(response);

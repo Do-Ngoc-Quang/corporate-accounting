@@ -15,6 +15,7 @@ use App\Http\Controllers\ChungTuGhiSosController;
 use App\Http\Controllers\ChungTuKetChuyenController;
 use App\Http\Controllers\ChungTuNganHangController;
 use App\Http\Controllers\PhieuNhapHangTraLaiController;
+use App\Http\Controllers\PhieuXuatHangTraLaiController;
 use App\Http\Controllers\USERController;
 
 /*
@@ -203,8 +204,22 @@ Route::middleware(['auth'])->group(function () {
         //Chi tiết
         Route::get('phieunhaphangtralaichitiet/{machungtu}', 'get_phieunhaphangtralaichitiet');
         Route::put('phieunhaphangtralaichitiet_update/{id}', 'phieunhaphangtralaichitiet_update');
-
     });
+
+    //Phiếu xuất hàng trả lại
+    Route::controller(PhieuXuatHangTraLaiController::class)->group(function () {
+        //Phiếu xuất hàng trả lại
+        Route::get('phieuxuathangtralai', 'index');
+        Route::get('phieuxuathangtralai/{machungtu}', 'get_phieuxuathangtralai');
+        Route::post('phieuxuathangtralai_add', 'store')->name('phieuxuathangtralai.store');
+        Route::put('phieuxuathangtralai_update/{id}', 'update');
+
+        //Chi tiết
+        Route::get('phieuxuathangtralaichitiet/{machungtu}', 'get_phieuxuathangtralaichitiet');
+        Route::put('phieuxuathangtralaichitiet_update/{id}', 'phieuxuathangtralaichitiet_update');
+    });
+
+
     //Phân quyền
     Route::controller(PhanQuyenController::class)->group(function () {
         Route::get('phanquyen', 'index');
