@@ -196,8 +196,8 @@
                     </tbody>
                 </table>
                 <div id="section1-2">
-                    <button class="btnAddnew" style="margin: 7px 50px 0 20px; width: 20%;" type="button" onclick="resetAndSetupValue()" id="btnLamMoi">Làm mới phiếu thu</button>
-                    <button class="btnAddnew" style="margin-top: 7px; width: 70%;" type="button" onclick="addNewPhieuThu()" id="btnTaoPhieuThu">Tạo phiếu thu</button>
+                    <button class="btnAddnew" style="margin: 7px 20px 0 35%; width: 10%;" type="button" onclick="resetAndSetupValue()" id="btnLamMoi">Thêm mới</button>
+                    <button class="btnAddnew" style="margin-top: 7px; width: 10%;" type="button" onclick="addNewPhieuThu()" id="btnTaoPhieuThu">Lưu</button>
                 </div>
             </div>
         </div>

@@ -200,10 +200,9 @@
                     </tbody>
                 </table>
                 <div id="section1-2">
-                    <button class="btnAddnew" style="margin: 10px 30px 0 20px; width: 30%;" type="button" onclick="addNewPhieuNhapHangHoa()" id="btnTaoPhieu">Tạo phiếu nhập</button>
-                    <button class="btnAddnew" style="margin: 10px 30px 0 20px; width: 30%;" type="button" onclick="updatePhieuNhapHangHoa()" id="btnCapNhat" disabled>Cập nhật</button>
-                    <button class="btnAddnew" style="margin: 10px 30px 0 20px; width: 20%;" type="button" onclick="resetAndSetupValue()" id="btnLamMoi">Làm mới</button>
-
+                    <button class="btnAddnew" style="margin: 10px 20px 0 25%; width: 10%;" type="button" onclick="resetAndSetupValue()" id="btnLamMoi">Thêm mới</button>
+                    <button class="btnAddnew" style="margin: 10px 20px 0 20px; width: 10%;" type="button" onclick="addNewPhieuNhapHangHoa()" id="btnTaoPhieu">Lưu</button>
+                    <button class="btnAddnew" style="margin: 10px 20px 0 20px; width: 10%;" type="button" onclick="updatePhieuNhapHangHoa()" id="btnCapNhat" disabled>Cập nhật</button>
                 </div>
             </div>
         </div>

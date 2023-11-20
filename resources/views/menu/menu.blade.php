@@ -58,16 +58,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink" href="{{ url('/phieunhaphangtralai') }}">
-                            Phiếu nhập hàng trả lại
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link navlink" href="{{ url('/phieuxuathangtralai') }}">
-                            Phiếu xuất hàng trả lại
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link navlink" href="{{ url('/chungtughiso') }}">
                             Chứng từ ghi sổ
                         </a>
@@ -80,6 +70,16 @@
                     <li class="nav-item">
                         <a class="nav-link navlink" href="{{ url('/chungtuketchuyen') }}">
                             Chứng từ kết chuyển
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navlink" href="{{ url('/phieunhaphangtralai') }}">
+                            Phiếu nhập hàng trả lại
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navlink" href="{{ url('/phieuxuathangtralai') }}">
+                            Phiếu xuất hàng trả lại
                         </a>
                     </li>
                 </ul>
