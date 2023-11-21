@@ -36,7 +36,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Tạm thời sẽ đóng middleware lại cho dễ sử dụng, mọi thứ đã OK
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

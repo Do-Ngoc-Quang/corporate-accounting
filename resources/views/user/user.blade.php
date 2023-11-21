@@ -23,10 +23,10 @@
         <!-- Khung hiển thị thông tin bên phải -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content-main">
 
-            <!-- <form action="user_update/{{$user->id}}" method="POST" enctype="multipart/form-data" style="margin-top: 20px;">
+            <form action="user_update/{{$user->id}}" method="POST" enctype="multipart/form-data" style="margin-top: 20px;">
                 @csrf
-                @method('PUT') -->
-            <!-- <div class="card-body">
+                @method('PUT')
+                <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img src="{{ asset('storage/upload_avatars/' . $user->avatar) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                         <div class="button-wrapper">
@@ -39,51 +39,51 @@
                             <p class="text-muted mb-0">Cho phép JPG, GIF hoặc PNG.</p>
                         </div>
                     </div>
-                </div> -->
-            <hr class="my-0" />
-            <div class="card-body">
-                <div class="row">
-                    <div class="mb-3 col-md-6">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input class="form-control" type="text" id="email" name="email" value="{{$user->email}}" />
-                    </div>
-                    <div class="mb-3 col-md-6">
-                        <label for="firstName" class="form-label">Họ và tên</label>
-                        <input class="form-control" type="text" id="name" name="name" value="{{$user->name}}" autofocus />
-                    </div>
-                    <div class="mb-3 col-md-6">
-                        <label class="form-label" for="phoneNumber">Số điện thoại</label>
-                        <div class="input-group input-group-merge">
-                            <span class="input-group-text">VN (+84)</span>
-                            <input type="text" id="sodienthoai" name="sodienthoai" class="form-control" value="{{$user->sodienthoai}}" placeholder="Số điện thoại" />
+                </div>
+                <hr class="my-0" />
+                <div class="card-body">
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input class="form-control" type="text" id="email" name="email" value="{{$user->email}}"/>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="firstName" class="form-label">Họ và tên</label>
+                            <input class="form-control" type="text" id="name" name="name" value="{{$user->name}}"/>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" for="phoneNumber">Số điện thoại</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text">VN (+84)</span>
+                                <input type="text" id="sodienthoai" name="sodienthoai" class="form-control" value="{{$user->sodienthoai}}" placeholder="Số điện thoại" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="address" class="form-label">Địa chỉ</label>
+                            <input type="text" class="form-control" id="diachi" name="diachi" value="{{$user->diachi}}" placeholder="Địa chỉ" />
                         </div>
                     </div>
-                    <div class="mb-3 col-md-6">
-                        <label for="address" class="form-label">Địa chỉ</label>
-                        <input type="text" class="form-control" id="diachi" name="diachi" value="{{$user->diachi}}" placeholder="Địa chỉ" />
+                    <div class="mt-2 d-flex justify-content-center">
+                        <button type="btn" class="btn btn-info me-2">Save changes</button>
                     </div>
                 </div>
-                <div class="mt-2 d-flex justify-content-center">
-                    <button onclick="update('{{$user->id}}')" type="btn" class="btn btn-info me-2">Save changes</button>
-                </div>
-            </div>
-            <!-- </form> -->
+            </form>
         </main>
     </div>
 </div>
 <script>
-    // const avatarInput = document.getElementById('avatar');
-    // const avatarImg = document.getElementById('uploadedAvatar');
+    const avatarInput = document.getElementById('avatar');
+    const avatarImg = document.getElementById('uploadedAvatar');
 
-    // avatarInput.addEventListener('change', function(event) {
-    //     const file = event.target.files[0];
-    //     const reader = new FileReader();
+    avatarInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
 
-    //     reader.onload = function(e) {
-    //         avatarImg.src = e.target.result;
-    //     };
-    //     reader.readAsDataURL(file);
-    // });
+        reader.onload = function(e) {
+            avatarImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
 
     $.ajaxSetup({
         headers: {
@@ -91,37 +91,36 @@
         }
     });
 
-    function update(id){
+    // function update(id) {
 
-        var email = $("#email").val();
-        var name = $("#name").val();
-        var sodienthoai = $("#sodienthoai").val();
-        var diachi = $("#diachi").val();
+    //     var email = $("#email").val();
+    //     var name = $("#name").val();
+    //     var sodienthoai = $("#sodienthoai").val();
+    //     var diachi = $("#diachi").val();
 
-        console.log(email, name, sodienthoai, diachi);
+    //     console.log(email, name, sodienthoai, diachi);
 
-        $.ajax({
-            method: 'PUT',
-            url: '/user_update/' + id,
-            data: {
-                email: email,
-                name: name,
-                sodienthoai: sodienthoai,
-                diachi: diachi
-            },
-            success: function(response) {
-                console.log(response);
-                // Xử lý phản hồi
-                toastr.success("Cập nhật thành công");
+    //     $.ajax({
+    //         method: 'PUT',
+    //         url: '/user_update/' + id,
+    //         data: {
+    //             email: email,
+    //             name: name,
+    //             sodienthoai: sodienthoai,
+    //             diachi: diachi
+    //         },
+    //         success: function(response) {
+    //             console.log(response);
+    //             // Xử lý phản hồi
+    //             toastr.success("Cập nhật thành công");
 
-            },
-            error: function(error) {
-                toastr.error("Lỗi cập nhật");
-                console.log(error);
-            }
-        });
-    }
-
+    //         },
+    //         error: function(error) {
+    //             toastr.error("Lỗi cập nhật");
+    //             console.log(error);
+    //         }
+    //     });
+    // }
 </script>
 
 @endsection
