@@ -83,7 +83,7 @@
                 <div id="section1-1">
                     <table class="custom-table-showID" style="width: 100%;" id="dataTable_LoaiChungTu">
                         <thead>
-                            <tr>
+                            <!-- <tr>
                                 <th>
                                     <select name="" id="select_loaiChungTu" style="width: 100%; text-align:center;" onfocus="select_loaiChungTu()">
                                         <option value="default" disabled selected>Chọn loại chứng từ</option>
@@ -93,14 +93,17 @@
                                         <option value="phieuxuathangtralai">Phiếu xuất hàng trả lại</option>
                                     </select>
                                 </th>
+                            </tr> -->
+                            <tr>
+                                <th>Mã chứng từ</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- @foreach($chungtughiso as $ghiso) -->
+                            @foreach($chungtughiso as $ghiso)
                             <tr onclick="highlightRowandCollect(`<?= $ghiso->MaChungTu ?>`, this)">
-                                <!-- <td><input style="width: 100%; text-align: center;" readonly type="text" id="MaChungTu" value="{{ $ghiso->MaChungTu }}"></td> -->
+                                <td><input style="width: 100%; text-align: center;" readonly type="text" id="MaChungTu" value="{{ $ghiso->MaChungTu }}"></td>
                             </tr>
-                            <!-- @endforeach -->
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -216,7 +219,7 @@
                     </tbody>
                 </table>
                 <div id="section1-2">
-                   
+
                     <button class="btnAddnew" style="margin: 10px 20px 0 25%; width: 10%;" type="button" onclick="resetAndSetupValue()" id="btnLamMoi">Thêm mới</button>
                     <button class="btnAddnew" style="margin: 10px 20px 0 20px; width: 10%;" type="button" onclick="addNewChungTuGhiSo()" id="btnTaoPhieu">Lưu</button>
                     <button class="btnAddnew" style="margin: 10px 20px 0 20px; width: 10%;" type="button" onclick="updateChungTuGhiSo()" id="btnCapNhat" disabled>Cập nhật</button>
@@ -265,95 +268,271 @@
     //Lấy thẻ checkbox cho phép chỉnh sửa
     var checkbox = document.getElementById("edit");
 
-
     //Phân loại chứng từ theo lựa chọn option
-    function select_loaiChungTu() {
-        removePreviousRows("dataTable_LoaiChungTu");
-        //dataTable hiện thị loại chứng từ
-        var tableBody = document.getElementById("dataTable_LoaiChungTu").getElementsByTagName("tbody")[0];
+    // function select_loaiChungTu() {
+    //     removePreviousRows("dataTable_LoaiChungTu");
+    //     //dataTable hiện thị loại chứng từ
+    //     var tableBody = document.getElementById("dataTable_LoaiChungTu").getElementsByTagName("tbody")[0];
 
-        //Thẻ select chọn lại chứng từ
-        var select_loaiChungTu = document.getElementById("select_loaiChungTu");
-        select_loaiChungTu.addEventListener("change", function() {
-            var selectedValue = this.value;
+    //     //Thẻ select chọn lại chứng từ
+    //     var select_loaiChungTu = document.getElementById("select_loaiChungTu");
+    //     select_loaiChungTu.addEventListener("change", function() {
+    //         var selectedValue = this.value;
 
-            switch (selectedValue) {
+    //         switch (selectedValue) {
 
-                case 'phieunhap':
+    //             case 'phieunhap':
 
-                    //Xóa các mã đang hiển thị trước khi tải mã chứng từ mới
-                    removePreviousRows("dataTable_LoaiChungTu");
+    //                 //Xóa các mã đang hiển thị trước khi tải mã chứng từ mới
+    //                 removePreviousRows("dataTable_LoaiChungTu");
 
-                    // Liệt kê danh sách mã chứng từ nhập hàng
-                    fetch('get_PhieuNhapHang')
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            for (var i = 0; i < data.length; i++) {
+    //                 // Liệt kê danh sách mã chứng từ nhập hàng
+    //                 fetch('get_PhieuNhapHang')
+    //                     .then(response => {
+    //                         if (!response.ok) {
+    //                             throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+    //                         }
+    //                         return response.json();
+    //                     })
+    //                     .then(data => {
+    //                         for (var i = 0; i < data.length; i++) {
 
-                                var newRow = tableBody.insertRow();
-                                var cell = newRow.insertCell(0);
-                                cell.innerHTML = `<input style="width: 100%; text-align: center;" readonly type="text" id="MaChungTu" value="${data[i]}" onclick="highlightRowandCollect('${data[i]}', this, 'phieunhap')">`;
-                            }
+    //                             var newRow = tableBody.insertRow();
+    //                             var cell = newRow.insertCell(0);
+    //                             cell.innerHTML = `<input style="width: 100%; text-align: center;" readonly type="text" id="MaChungTu" value="${data[i]}" onclick="highlightRowandCollect('${data[i]}', this, 'phieunhap')">`;
+    //                         }
 
-                            console.log(data);
-                        })
-                        .catch(error => {
-                            // Handle errors
-                            console.error('There was a problem with the fetch operation:', error);
-                        });
-
-
-                    break;
-
-                case 'phieuxuat':
-                    //Xóa các mã đang hiển thị trước khi tải mã chứng từ mới
-                    removePreviousRows("dataTable_LoaiChungTu");
-
-                    // Liệt kê danh sách mã chứng từ xuất hàng
-                    fetch('get_PhieuXuatHang')
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            for (var i = 0; i < data.length; i++) {
-
-                                var newRow = tableBody.insertRow();
-                                var cell = newRow.insertCell(0);
-                                cell.innerHTML = `<input style="width: 100%; text-align: center;" readonly type="text" id="MaChungTu" value="${data[i]}">`;
-                            }
-                            console.log(data);
-                        })
-                        .catch(error => {
-                            // Handle errors
-                            console.error('There was a problem with the fetch operation:', error);
-                        });
-
-                    break;
-
-                case '3':
-                    break;
-                case '4':
-                    break;
-
-                default:
-                    break;
-            }
+    //                         console.log(data);
+    //                     })
+    //                     .catch(error => {
+    //                         // Handle errors
+    //                         console.error('There was a problem with the fetch operation:', error);
+    //                     });
 
 
-        });
-    }
+    //                 break;
+
+    //             case 'phieuxuat':
+    //                 //Xóa các mã đang hiển thị trước khi tải mã chứng từ mới
+    //                 removePreviousRows("dataTable_LoaiChungTu");
+
+    //                 // Liệt kê danh sách mã chứng từ xuất hàng
+    //                 fetch('get_PhieuXuatHang')
+    //                     .then(response => {
+    //                         if (!response.ok) {
+    //                             throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+    //                         }
+    //                         return response.json();
+    //                     })
+    //                     .then(data => {
+    //                         for (var i = 0; i < data.length; i++) {
+
+    //                             var newRow = tableBody.insertRow();
+    //                             var cell = newRow.insertCell(0);
+    //                             cell.innerHTML = `<input style="width: 100%; text-align: center;" readonly type="text" id="MaChungTu" value="${data[i]}">`;
+    //                         }
+    //                         console.log(data);
+    //                     })
+    //                     .catch(error => {
+    //                         // Handle errors
+    //                         console.error('There was a problem with the fetch operation:', error);
+    //                     });
+
+    //                 break;
+
+    //             case '3':
+    //                 break;
+    //             case '4':
+    //                 break;
+
+    //             default:
+    //                 break;
+    //         }
+
+
+    //     });
+    // }
 
     // Xử lý highlight dòng được click và hiện thị bảng thứ 2 (bảng phụ)
-    function highlightRowandCollect(machungtu, row, loaichungtu) {
+    // function highlightRowandCollect(machungtu, row, loaichungtu) {
 
+    //     //Thiết lập các thẻ input ẩn đi
+    //     txtsoChungTu.disabled = true;
+    //     txtngayChungTu.disabled = true;
+    //     txtngayHoaDon.disabled = true;
+    //     checkbox.checked = false;
+
+    //     //Thiết lập các button ẩn đi
+    //     btnCapNhat.disabled = false;
+    //     btnTaoPhieu.disabled = true;
+
+    //     //Thiết lập lại thẻ select thành thẻ input để hiển thị thông tin mã khách hàng
+    //     replaceSelectWithInput_NO();
+    //     replaceSelectWithInput_CO();
+
+    //     // Bỏ lớp highlight ở tất cả các thẻ tr
+    //     var allRows = document.querySelectorAll(".custom-table-showID tbody tr");
+    //     allRows.forEach(function(r) {
+    //         r.classList.remove("highlight");
+    //     });
+
+    //     // Thêm lớp highlight cho thẻ tr được click
+    //     row.classList.add("highlight");
+
+
+    //     switch (loaichungtu) {
+    //         case 'phieunhap':
+
+    //             // Xử lý hiện thị bảng chính
+    //             fetch('phieunhaphanghoa/' + machungtu)
+
+    //                 .then(response => {
+    //                     if (!response.ok) {
+    //                         throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+    //                     }
+    //                     return response.json();
+    //                 })
+    //                 .then(data => {
+
+    //                     //Đoạn code dưới đây thực thi sự cập nhật, tức hiển thị dữ liệu tức thì mà không tải lại trang
+    //                     data.forEach(phieunhaphanghoa => {
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#loaiChungTu").val(phieunhaphanghoa.LoaiChungTu);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#soChungTu").val(phieunhaphanghoa.SoChungTu);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#maChungTu").val(phieunhaphanghoa.MaChungTu);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#ngayChungTu").val(phieunhaphanghoa.NgayChungTu);
+    //                         $("tr[data-id='trChungTuGhiSo'] td textarea#dienGiai").val(phieunhaphanghoa.DienGiai);
+
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#maKhachHangCo").val(phieunhaphanghoa.MaNguoiBan);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#tenKhachHangCo").val(phieunhaphanghoa.TenNguoiBan);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#maSoThueCo").val(phieunhaphanghoa.MaSoThueNguoiBan);
+
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanNo").val(phieunhaphanghoa.TaiKhoanNo);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanNoGTGT").val(phieunhaphanghoa.TaiKhoanNoGTGT);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanCo").val(phieunhaphanghoa.TaiKhoanCo);
+
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#matHang").val(phieunhaphanghoa.MatHang);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#soXeRy").val(phieunhaphanghoa.SoXeRy);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#soHoaDon").val(phieunhaphanghoa.SoHoaDon);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#ngayHoaDon").val(phieunhaphanghoa.NgayHoaDon);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#thueSuat").val(phieunhaphanghoa.ThueSuat);
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#thueGTGT").val(phieunhaphanghoa.ThueGTGT);
+
+    //                         $("tr[data-id='trChungTuGhiSo'] td input#id").val(phieunhaphanghoa.id);
+
+    //                     });
+    //                 })
+    //                 .catch(error => {
+    //                     // Handle errors
+    //                     console.error('There was a problem with the fetch operation:', error);
+    //                 });
+
+    //             break;
+    //         case 'phieuxuat':
+
+    //             break;
+    //         default:
+    //             break;
+
+    //     }
+
+    //     // Xử lý hiện thị bảng chính
+    //     fetch('chungtughiso/' + machungtu)
+
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+
+    //             //Đoạn code dưới đây thực thi sự cập nhật, tức hiển thị dữ liệu tức thì mà không tải lại trang
+    //             data.forEach(chungtughiso => {
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#loaiChungTu").val(chungtughiso.LoaiChungTu);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#soChungTu").val(chungtughiso.SoChungTu);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#maChungTu").val(chungtughiso.MaChungTu);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#ngayChungTu").val(chungtughiso.NgayChungTu);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#hoTen").val(chungtughiso.HoTen);
+    //                 $("tr[data-id='trChungTuGhiSo'] td textarea#dienGiai").val(chungtughiso.DienGiai);
+
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#maKhachHangNo").val(chungtughiso.MaKhachHangNo);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#tenKhachHangNo").val(chungtughiso.TenKhachHangNo);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#maSoThueNo").val(chungtughiso.MaSoThueNo);
+
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#maKhachHangCo").val(chungtughiso.MaKhachHangCo);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#tenKhachHangCo").val(chungtughiso.TenKhachHangCo);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#maSoThueCo").val(chungtughiso.MaSoThueCo);
+
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#matHang").val(chungtughiso.MatHang);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#bieuThue").val(chungtughiso.BieuThue);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#soXeRy").val(chungtughiso.SoXeRy);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#soHoaDon").val(chungtughiso.SoHoaDon);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#ngayHoaDon").val(chungtughiso.NgayHoaDon);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#thueSuat").val(chungtughiso.ThueSuat);
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#thueGTGT").val(chungtughiso.ThueGTGT);
+
+    //                 $("tr[data-id='trChungTuGhiSo'] td input#id").val(chungtughiso.id);
+
+    //             });
+    //         })
+    //         .catch(error => {
+    //             // Handle errors
+    //             console.error('There was a problem with the fetch operation:', error);
+    //         });
+
+
+    //     // Xử lý hiện thị bảng chi tiết (phụ)
+    //     fetch('chungtughisochitiet/' + machungtu)
+
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+
+    //             // Lấy thẻ tbody của dataTableChiTiet
+    //             var tableBody = document.getElementById("dataTableChiTiet").getElementsByTagName("tbody")[0];
+
+    //             // Xóa toàn bộ nội dung trong tbody
+    //             tableBody.innerHTML = '';
+
+    //             data.forEach(chungtughisochitiet => {
+
+    //                 // Thêm dữ liệu mới vào tbody
+    //                 var newRow = tableBody.insertRow(tableBody.rows.length);
+
+    //                 // Gắn giá trị từ đối tượng congno vào các ô input tương ứng
+    //                 var cell1 = newRow.insertCell(0);
+    //                 var cell2 = newRow.insertCell(1);
+    //                 var cell3 = newRow.insertCell(2);
+    //                 var cell4 = newRow.insertCell(3);
+    //                 var cell5 = newRow.insertCell(4);
+
+    //                 cell1.innerHTML = `<input style="width: 600px; text-align: center;" type="text" id="dienGiaiChiTiet" value="${chungtughisochitiet.DienGiaiChiTiet}">`;
+    //                 cell2.innerHTML = `<input style="width: 200px; text-align: center;" type="text" id="soTien" value="${chungtughisochitiet.SoTien}" oninput="ThueGTGT_InputChange()">`;
+    //                 cell3.innerHTML = `<input style="width: 120px; text-align: center;" type="text" id="taiKhoanNo" value="${chungtughisochitiet.TaiKhoanNo}" readonly>`;
+    //                 cell4.innerHTML = `<input style="width: 120px; text-align: center;" type="text" id="taiKhoanCo" value="${chungtughisochitiet.TaiKhoanCo}" readonly>`;
+    //                 cell5.innerHTML = `<button style="width: 100px;" type="button" onclick="updateChungTuGhiSoChiTiet( '${chungtughisochitiet.id}')">Cập nhật</button>`;
+
+    //                 // oninput="ThueGTGT_InputChange()"
+
+    //                 // Thêm sự kiện cho sự kiện click vào dòng
+    //                 newRow.onclick = function() {
+    //                     highlightRow(this);
+    //                 };
+    //             });
+
+    //         })
+    //         .catch(error => {
+    //             // Handle errors
+    //             console.error('There was a problem with the fetch operation:', error);
+    //         });
+    // }
+
+    // Xử lý highlight dòng được click và hiện thị bảng thứ 2 (bảng phụ)
+    function highlightRowandCollect(machungtu, row) {
         //Thiết lập các thẻ input ẩn đi
         txtsoChungTu.disabled = true;
         txtngayChungTu.disabled = true;
@@ -376,62 +555,6 @@
 
         // Thêm lớp highlight cho thẻ tr được click
         row.classList.add("highlight");
-
-
-        switch (loaichungtu) {
-            case 'phieunhap':
-
-                // Xử lý hiện thị bảng chính
-                fetch('phieunhaphanghoa/' + machungtu)
-
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-
-                        //Đoạn code dưới đây thực thi sự cập nhật, tức hiển thị dữ liệu tức thì mà không tải lại trang
-                        data.forEach(phieunhaphanghoa => {
-                            $("tr[data-id='trChungTuGhiSo'] td input#loaiChungTu").val(phieunhaphanghoa.LoaiChungTu);
-                            $("tr[data-id='trChungTuGhiSo'] td input#soChungTu").val(phieunhaphanghoa.SoChungTu);
-                            $("tr[data-id='trChungTuGhiSo'] td input#maChungTu").val(phieunhaphanghoa.MaChungTu);
-                            $("tr[data-id='trChungTuGhiSo'] td input#ngayChungTu").val(phieunhaphanghoa.NgayChungTu);
-                            $("tr[data-id='trChungTuGhiSo'] td textarea#dienGiai").val(phieunhaphanghoa.DienGiai);
-
-                            $("tr[data-id='trChungTuGhiSo'] td input#maKhachHangCo").val(phieunhaphanghoa.MaNguoiBan);
-                            $("tr[data-id='trChungTuGhiSo'] td input#tenKhachHangCo").val(phieunhaphanghoa.TenNguoiBan);
-                            $("tr[data-id='trChungTuGhiSo'] td input#maSoThueCo").val(phieunhaphanghoa.MaSoThueNguoiBan);
-
-                            $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanNo").val(phieunhaphanghoa.TaiKhoanNo);
-                            $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanNoGTGT").val(phieunhaphanghoa.TaiKhoanNoGTGT);
-                            $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanCo").val(phieunhaphanghoa.TaiKhoanCo);
-
-                            $("tr[data-id='trChungTuGhiSo'] td input#matHang").val(phieunhaphanghoa.MatHang);
-                            $("tr[data-id='trChungTuGhiSo'] td input#soXeRy").val(phieunhaphanghoa.SoXeRy);
-                            $("tr[data-id='trChungTuGhiSo'] td input#soHoaDon").val(phieunhaphanghoa.SoHoaDon);
-                            $("tr[data-id='trChungTuGhiSo'] td input#ngayHoaDon").val(phieunhaphanghoa.NgayHoaDon);
-                            $("tr[data-id='trChungTuGhiSo'] td input#thueSuat").val(phieunhaphanghoa.ThueSuat);
-                            $("tr[data-id='trChungTuGhiSo'] td input#thueGTGT").val(phieunhaphanghoa.ThueGTGT);
-
-                            $("tr[data-id='trChungTuGhiSo'] td input#id").val(phieunhaphanghoa.id);
-
-                        });
-                    })
-                    .catch(error => {
-                        // Handle errors
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
-
-                break;
-            case 'phieuxuat':
-
-                break;
-            default:
-                break;
-
-        }
 
         // Xử lý hiện thị bảng chính
         fetch('chungtughiso/' + machungtu)
@@ -460,6 +583,10 @@
                     $("tr[data-id='trChungTuGhiSo'] td input#maKhachHangCo").val(chungtughiso.MaKhachHangCo);
                     $("tr[data-id='trChungTuGhiSo'] td input#tenKhachHangCo").val(chungtughiso.TenKhachHangCo);
                     $("tr[data-id='trChungTuGhiSo'] td input#maSoThueCo").val(chungtughiso.MaSoThueCo);
+
+                    $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanNo").val(chungtughiso.TaiKhoanNo);
+                    $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanNoGTGT").val(chungtughiso.TaiKhoanNoGTGT);
+                    $("tr[data-id='trChungTuGhiSo'] td input#taiKhoanCo").val(chungtughiso.TaiKhoanCo);
 
                     $("tr[data-id='trChungTuGhiSo'] td input#matHang").val(chungtughiso.MatHang);
                     $("tr[data-id='trChungTuGhiSo'] td input#bieuThue").val(chungtughiso.BieuThue);
@@ -514,8 +641,6 @@
                     cell4.innerHTML = `<input style="width: 120px; text-align: center;" type="text" id="taiKhoanCo" value="${chungtughisochitiet.TaiKhoanCo}" readonly>`;
                     cell5.innerHTML = `<button style="width: 100px;" type="button" onclick="updateChungTuGhiSoChiTiet( '${chungtughisochitiet.id}')">Cập nhật</button>`;
 
-                    // oninput="ThueGTGT_InputChange()"
-
                     // Thêm sự kiện cho sự kiện click vào dòng
                     newRow.onclick = function() {
                         highlightRow(this);
@@ -527,7 +652,6 @@
                 // Handle errors
                 console.error('There was a problem with the fetch operation:', error);
             });
-
     }
 
     //Hàm xử lý cho phép chỉnh sửa phiếu chi

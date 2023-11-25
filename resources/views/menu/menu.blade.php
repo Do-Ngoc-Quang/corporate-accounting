@@ -85,12 +85,12 @@
                 </ul>
             </li>
 
-            <li class="nav-item dropdown-submenu">
+            <!-- <li class="nav-item dropdown-submenu">
                 <a class="nav-link navlink" href="#" data-bs-toggle="collapse" data-bs-target="#submenuBaoCao" aria-expanded="false">
                     <span class="fw-bold">BÁO CÁO</span>
                     <i class="fa-duotone fa-caret-down"></i>
                 </a>
-                <!-- Dropdown menu -->
+   
                 <ul class="collapse list-unstyled submenu-padding" id="submenuBaoCao">
                     <li class="nav-item">
                         <a class="nav-link navlink" href="{{ url('/baocaotaichinh') }}">
@@ -113,14 +113,14 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
 
-            <li class="nav-item dropdown-submenu">
+            <!-- <li class="nav-item dropdown-submenu">
                 <a class="nav-link navlink" href="#" data-bs-toggle="collapse" data-bs-target="#submenuKetChuyen" aria-expanded="false">
                     <span class="fw-bold">KẾT CHUYỂN</span>
                     <i class="fa-duotone fa-caret-down"></i>
                 </a>
-                <!-- Dropdown menu -->
+                
                 <ul class="collapse list-unstyled submenu-padding" id="submenuKetChuyen">
                     <li class="nav-item">
                         <a class="nav-link navlink" href="{{ url('/ketchuyencuoiky') }}">
@@ -133,23 +133,18 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
 
             <li class="nav-item dropdown-submenu">
                 <a class="nav-link navlink" href="#" data-bs-toggle="collapse" data-bs-target="#submenuCongCu" aria-expanded="false">
-                    <span class="fw-bold">CÔNG CỤ</span>
+                    <span class="fw-bold">NHẬT KÝ</span>
                     <i class="fa-duotone fa-caret-down"></i>
                 </a>
-                <!-- Dropdown menu -->
+   
                 <ul class="collapse list-unstyled submenu-padding" id="submenuCongCu">
                     <li class="nav-item">
-                        <a class="nav-link navlink" href="{{ url('/saoluvaphuchoi') }}">
-                            Sao lưu và phục hồi dữ liệu
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link navlink" href="{{ url('/caidat') }}">
-                            Cài đặt hệ thống
+                        <a class="nav-link navlink" href="{{ url('/sonhatkychung') }}">
+                            Sổ nhật ký chung
                         </a>
                     </li>
                 </ul>

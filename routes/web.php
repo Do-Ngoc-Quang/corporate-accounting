@@ -16,6 +16,7 @@ use App\Http\Controllers\ChungTuKetChuyenController;
 use App\Http\Controllers\ChungTuNganHangController;
 use App\Http\Controllers\PhieuNhapHangTraLaiController;
 use App\Http\Controllers\PhieuXuatHangTraLaiController;
+use App\Http\Controllers\SoNhatKyChungController;
 use App\Http\Controllers\USERController;
 
 /*
@@ -218,6 +219,17 @@ Route::middleware(['auth'])->group(function () {
         Route::put('phieuxuathangtralaichitiet_update/{id}', 'phieuxuathangtralaichitiet_update');
     });
 
+    //Sổ nhật ký chung
+    Route::controller(SoNhatKyChungController::class)->group(function () {
+        Route::get('sonhatkychung', 'index');
+
+        Route::get('get_PT', 'get_PT');
+        Route::get('get_TK_NO/{machungtu}', 'get_TK_NO');
+        Route::get('get_TK_CO/{machungtu}', 'get_TK_CO');
+        
+        Route::get('get_PC', 'get_PC');
+
+    });
 
     //Phân quyền
     Route::controller(PhanQuyenController::class)->group(function () {

@@ -156,10 +156,10 @@
                             <td>
                             <div class="row-col-10">
                                     <div class="label-col-10">Tài khoản nợ giá vốn:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 1px; width: 50px;" type="text" id="taiKhoanNoGiaVon"></div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 5px; width: 50px;" type="text" id="taiKhoanNoGiaVon"></div>
 
                                     <div class="label-col-10" style="margin-left: 50px;">Tài khoản có giá vốn:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 1px; width: 50px;" type="text" id="taiKhoanCoGiaVon"></div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 5px; width: 50px;" type="text" id="taiKhoanCoGiaVon"></div>
                                 </div>
                                 <div class="row-col-10">
                                     <div class="label-col-10">Tài khoản nợ giá mua:</div>
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="row-col-10">
                                     <div class="label-col-10" style="margin-left: 262px;">Tài khoản nợ GTGT:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 12px; width: 50px;" type="text" id="taiKhoanCoGTGT"></div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 19px; width: 50px;" type="text" id="taiKhoanCoGTGT"></div>
                                 </div>
                                 <hr>
                                 <div class="row-col-10">

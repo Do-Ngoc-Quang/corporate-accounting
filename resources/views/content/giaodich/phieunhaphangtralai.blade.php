@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="row-col-10">
                                     <div class="label-col-10" style="margin-left: 262px;">Tài khoản nợ GTGT:</div>
-                                    <div class="input-col-10"><input readonly style="margin-left: 12px; width: 50px;" type="text" id="taiKhoanNoGTGT"></div>
+                                    <div class="input-col-10"><input readonly style="margin-left: 10px; width: 50px;" type="text" id="taiKhoanNoGTGT"></div>
                                 </div>
                                 <hr>
                                 <div class="row-col-10">
