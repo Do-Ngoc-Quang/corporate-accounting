@@ -165,9 +165,9 @@
                     toastr.success("Thêm khách hàng thành công");
                     console.log(response);
 
-                    // setTimeout(function() {
-                    //     location.reload();
-                    // }, 3100); // Đợi 3,1 giây trước khi reload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3100); // Đợi 3,1 giây trước khi reload
                 }
             },
             error: function(error) {

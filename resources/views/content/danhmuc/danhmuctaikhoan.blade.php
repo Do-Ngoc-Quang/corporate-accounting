@@ -26,7 +26,7 @@
                     @foreach($danhmuctaikhoan as $taikhoan)
                     <tr data-id="{{ $taikhoan->TaiKhoan }}" id="{{ $taikhoan->TaiKhoan }}" onclick="highlightRow(this)">
                         <td><input style="width: 80px; text-align: center;" readonly type="text" name="" id="TaiKhoan" value="{{ $taikhoan->TaiKhoan }}"></td>
-                        <td><input style="width: 300px; text-align: center;" type="text" name="" id="TenTaiKhoan" value="{{ $taikhoan->TenTaiKhoan }}"></td>
+                        <td><input style="width: 300px;" type="text" name="" id="TenTaiKhoan" value="{{ $taikhoan->TenTaiKhoan }}"></td>
                         <td><input style="width: 165px; text-align: center;" readonly type="text" name="" id="SoDuNoDau" value="{{ $taikhoan->SoDuNoDau }}"></td>
                         <td><input style="width: 165px; text-align: center;" readonly type="text" name="" id="SoDuCoDau" value="{{ $taikhoan->SoDuCoDau }}"></td>
                         <td><input style="text-align: center;" type="checkbox" name="" id="CoDinhKhoan" value="{{ $taikhoan->CoDinhKhoan }}" <?= $taikhoan->CoDinhKhoan == 1 ? 'checked' : '' ?>></td>

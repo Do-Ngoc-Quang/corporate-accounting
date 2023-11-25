@@ -865,7 +865,7 @@
 
         $.ajax({
             method: 'POST',
-            url: "{{ route('chungtunganhang.store') }}",
+            url: "{{ route('chungtughiso.store') }}",
             data: {
                 // Bảng chính
                 MaChungTu: maChungTu,
@@ -906,9 +906,9 @@
                     toastr.success("Tạo chứng từ ghi sổ thành công");
                     console.log(response);
 
-                    // setTimeout(function() {
-                    //     location.reload();
-                    // }, 3100); // Đợi 3,1 giây trước khi reload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3100); // Đợi 3,1 giây trước khi reload
                 }
             },
             error: function(error) {

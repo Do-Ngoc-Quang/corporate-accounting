@@ -121,9 +121,9 @@
                     toastr.success("Tạo mới hàng hóa thành công");
                     console.log(response);
 
-                    // setTimeout(function() {
-                    //     location.reload();
-                    // }, 3100); // Đợi 3,1 giây trước khi reload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3100); // Đợi 3,1 giây trước khi reload
                 }
             },
             error: function(error) {
@@ -156,14 +156,6 @@
             },
             success: function(response) {
                 toastr.success("Cập nhật hàng hóa thành công");
-
-                // Cập nhật dữ liệu trực tiếp trên giao diện
-                // row.querySelector("td:nth-child(2) input").value = tenHang;
-                // row.querySelector("td:nth-child(3) input").value = nhomHang;
-                // row.querySelector("td:nth-child(4) input").value = donViTinh;
-                // row.querySelector("td:nth-child(5) input").value = soLuongTonDau;
-                // row.querySelector("td:nth-child(6) input").value = thanhTienTonDau;
-                // row.querySelector("td:nth-child(7) input").value = ngayTonDau;
             },
             error: function(error) {
                 console.log(error);
