@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('LoaiChungTu');
             $table->date('NgayChungTu');
             $table->string('SoChungTu');
-            $table->string('MaNguoiBan');
-            $table->string('TenNguoiBan');
-            $table->string('MaSoThueNguoiBan');
+            $table->string('MaKhachHang');
+            $table->string('TenKhachHang');
+            $table->string('MaSoThue');
             $table->string('TaiKhoanNo');
             $table->string('TaiKhoanNoGTGT');
             $table->string('TaiKhoanCo');
