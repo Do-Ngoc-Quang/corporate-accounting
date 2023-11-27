@@ -223,12 +223,14 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(SoNhatKyChungController::class)->group(function () {
         Route::get('sonhatkychung', 'index');
 
-        Route::get('get_PT', 'get_PT');
+        //Phiếu thu
+        Route::get('get_ChungTu', 'get_ChungTu');
         Route::get('get_TK_NO/{machungtu}', 'get_TK_NO');
         Route::get('get_TK_CO/{machungtu}', 'get_TK_CO');
-        
-        Route::get('get_PC', 'get_PC');
+        Route::get('get_SoTien/{machungtu}', 'get_SoTien');
 
+        //Phiếu chi
+        // Route::get('get_PC', 'get_PC');
     });
 
     //Phân quyền
