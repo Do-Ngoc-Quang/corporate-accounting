@@ -30,7 +30,7 @@
                         <td><input style="width: 100px; text-align: center;" type="text" id="NhomHang" value="{{ $hanghoa->NhomHang }}"></td>
                         <td><input style="width: 40px; text-align: center;" type="text" id="DonViTinh" value="{{ $hanghoa->DonViTinh }}"></td>
                         <td><input style="width: 100px; text-align: center;" readonly type="text" id="SoLuongTonDau" value="{{ $hanghoa->SoLuongTonDau }}"></td>
-                        <td><input style="width: 150px; text-align: center;" readonly type="text" id="ThanhTienTonDau" value="{{ $hanghoa->ThanhTienTonDau }}"></td>
+                        <td><input style="width: 150px; text-align: center;" readonly type="text" id="ThanhTienTonDau" value="{{ $hanghoa->ThanhTienTonDau == 0 ? '0' : number_format($hanghoa->ThanhTienTonDau, 0, ',', '.') . ' đ' }}"></td>
                         <td><input style="width: 115px; text-align: center;" type="date" id="NgayTonDau" value="{{ $hanghoa->NgayTonDau }}"></td>
                         <td>
                             <!-- <input type="hidden" name="" id="MaHang" value="{{ $hanghoa->MaHang }}"> -->

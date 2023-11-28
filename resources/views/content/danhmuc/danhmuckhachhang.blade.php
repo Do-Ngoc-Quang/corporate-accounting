@@ -421,9 +421,9 @@
                             console.log(error);
                         }
                     });
-                    // setTimeout(function() {
-                    //     location.reload();
-                    // }, 3100); // Đợi 3,1 giây trước khi reload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3100); // Đợi 3,1 giây trước khi reload
                 }
 
             },

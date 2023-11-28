@@ -320,7 +320,7 @@
                     $("tr[data-id='trChungTu'] td input#soHoaDon").val(phieunhaphangtralai.SoHoaDon);
                     $("tr[data-id='trChungTu'] td input#ngayHoaDon").val(phieunhaphangtralai.NgayHoaDon);
                     $("tr[data-id='trChungTu'] td input#thueSuat").val(phieunhaphangtralai.ThueSuat);
-                    $("tr[data-id='trChungTu'] td input#thueGTGT").val(phieunhaphangtralai.ThueGTGT);
+                    $("tr[data-id='trChungTu'] td input#thueGTGT").val(parseFloat(phieunhaphangtralai.ThueGTGT).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
 
                     $("tr[data-id='trChungTu'] td input#id").val(phieunhaphangtralai.id);
 
@@ -368,9 +368,9 @@
                     cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${phieunhaphangtralaichitiet.DonViTinh}">`;
                     cell3.innerHTML = `<input style="width: 80px; text-align: center;" type="text" id="soLuong" value="${phieunhaphangtralaichitiet.SoLuong}" oninput="ThueGTGT_InputChange()">`;
                     cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${phieunhaphangtralaichitiet.DonGiaVon}" oninput="ThueGTGT_InputChange()">`;
-                    cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" value="${phieunhaphangtralaichitiet.ThanhTienGiaVon}" readonly>`;
+                    cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" value="${parseFloat(phieunhaphangtralaichitiet.ThanhTienGiaVon).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}" readonly>`;
                     cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" value="${phieunhaphangtralaichitiet.DonGiaBan}" oninput="ThueGTGT_InputChange()">`;
-                    cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" value="${phieunhaphangtralaichitiet.ThanhTienGiaBan}" readonly>`;
+                    cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" value="${parseFloat(phieunhaphangtralaichitiet.ThanhTienGiaBan).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}" readonly>`;
                     cell8.innerHTML = `<button style="width: 100px;" type="button" onclick="updateChungTuChiTiet( '${phieunhaphangtralaichitiet.id}')">Cập nhật</button>`;
 
                     // Thêm sự kiện cho sự kiện click vào dòng

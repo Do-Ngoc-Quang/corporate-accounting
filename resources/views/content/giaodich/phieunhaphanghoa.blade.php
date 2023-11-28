@@ -308,7 +308,7 @@
                     $("tr[data-id='trPhieuNhapHangHoa'] td input#soHoaDon").val(phieunhaphanghoa.SoHoaDon);
                     $("tr[data-id='trPhieuNhapHangHoa'] td input#ngayHoaDon").val(phieunhaphanghoa.NgayHoaDon);
                     $("tr[data-id='trPhieuNhapHangHoa'] td input#thueSuat").val(phieunhaphanghoa.ThueSuat);
-                    $("tr[data-id='trPhieuNhapHangHoa'] td input#thueGTGT").val(phieunhaphanghoa.ThueGTGT);
+                    $("tr[data-id='trPhieuNhapHangHoa'] td input#thueGTGT").val(parseFloat(phieunhaphanghoa.ThueGTGT).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
 
                     $("tr[data-id='trPhieuNhapHangHoa'] td input#id").val(phieunhaphanghoa.id);
 
@@ -354,7 +354,7 @@
                     cell2.innerHTML = `<input style=" text-align: center;" type="text" id="donViTinh" value="${phieunhaphanghoachitiet.DonViTinh}">`;
                     cell3.innerHTML = `<input style=" text-align: center;" type="text" id="soLuong" value="${phieunhaphanghoachitiet.SoLuong}"  oninput="ThueGTGT_InputChange()">`;
                     cell4.innerHTML = `<input style=" text-align: center;" type="text" id="donGia" value="${phieunhaphanghoachitiet.DonGia}" oninput="ThueGTGT_InputChange()">`;
-                    cell5.innerHTML = `<input style=" text-align: center;" type="text" id="thanhTien" value="${phieunhaphanghoachitiet.ThanhTien}" readonly>`;
+                    cell5.innerHTML = `<input style=" text-align: center;" type="text" id="thanhTien" value="${parseFloat(phieunhaphanghoachitiet.ThanhTien).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}" readonly>`;
                     cell6.innerHTML = `<button type="button" onclick="updatePhieuNhapHangHoaChiTiet( '${phieunhaphanghoachitiet.id}')">Cập nhật</button>`;
 
 

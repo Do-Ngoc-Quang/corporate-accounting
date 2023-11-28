@@ -1,4 +1,3 @@
-
 // Hàm thêm highlight cho thẻ <tr> được chọn
 function highlightRow(row) {
     // Bỏ lớp highlight ở tất cả các thẻ tr
@@ -18,5 +17,3 @@ toastr.options = {
     showMethod: "slideDown",
     timeOut: 3000,
 };
-
-

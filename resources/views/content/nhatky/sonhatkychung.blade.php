@@ -194,7 +194,7 @@
 
                         //Số tiền
                         var soTien = await getSoTien(item);
-                        row += '<td>' + soTien + '</td>';
+                        row += '<td>' + soTien.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</td>';
 
                     } catch (error) {
                         console.error(error);
@@ -216,7 +216,7 @@
 
                         //Số tiền
                         var soTien = await getSoTien(item);
-                        row += '<td>' + soTien + '</td>';
+                        row += '<td>' + soTien.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</td>';
 
                     } catch (error) {
                         console.error(error);
@@ -238,7 +238,7 @@
 
                         //Số tiền
                         var soTien = await getSoTien(item);
-                        row += '<td>' + soTien + '</td>';
+                        row += '<td>' + soTien.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</td>';
 
                     } catch (error) {
                         console.error(error);
@@ -260,7 +260,7 @@
 
                         //Số tiền
                         var soTien = await getSoTien(item);
-                        row += '<td>' + soTien + '</td>';
+                        row += '<td>' + soTien.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</td>';
 
                     } catch (error) {
                         console.error(error);
@@ -268,8 +268,8 @@
                     break;
 
                 case 'GS':
-                    row += '<td>' + item.MaKhachHangNo + '</td>'; //Mã khách hàng nợ
-                    row += '<td>' + item.MaKhachHangCo + '</td>'; //Mã khách hàng có
+                    row += '<td>' + (item.MaKhachHangNo ? item.MaKhachHangNo : '') + '</td>'; //Mã khách hàng nợ
+                    row += '<td>' + (item.MaKhachHangCo ? item.MaKhachHangCo : '') + '</td>'; //Mã khách hàng có
                     //Tài khoản nợ - có
                     try {
                         //Tài khoản nợ
@@ -282,7 +282,7 @@
 
                         //Số tiền
                         var soTien = await getSoTien(item);
-                        row += '<td>' + soTien + '</td>';
+                        row += '<td>' + soTien.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</td>';
 
                     } catch (error) {
                         console.error(error);
@@ -304,7 +304,7 @@
 
                         //Số tiền
                         var soTien = await getSoTien(item);
-                        row += '<td>' + soTien + '</td>';
+                        row += '<td>' + soTien.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</td>';
 
                     } catch (error) {
                         console.error(error);

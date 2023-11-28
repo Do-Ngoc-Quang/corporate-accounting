@@ -27,8 +27,8 @@
                     <tr data-id="{{ $taikhoan->TaiKhoan }}" id="{{ $taikhoan->TaiKhoan }}" onclick="highlightRow(this)">
                         <td><input style="width: 80px; text-align: center;" readonly type="text" name="" id="TaiKhoan" value="{{ $taikhoan->TaiKhoan }}"></td>
                         <td><input style="width: 300px;" type="text" name="" id="TenTaiKhoan" value="{{ $taikhoan->TenTaiKhoan }}"></td>
-                        <td><input style="width: 165px; text-align: center;" readonly type="text" name="" id="SoDuNoDau" value="{{ $taikhoan->SoDuNoDau }}"></td>
-                        <td><input style="width: 165px; text-align: center;" readonly type="text" name="" id="SoDuCoDau" value="{{ $taikhoan->SoDuCoDau }}"></td>
+                        <td><input style="width: 165px; text-align: center;" readonly type="text" name="" id="SoDuNoDau" value="{{ $taikhoan->SoDuNoDau == 0 ? '0' : number_format($taikhoan->SoDuNoDau, 0, ',', '.') . ' đ' }}"></td>
+                        <td><input style="width: 165px; text-align: center;" readonly type="text" name="" id="SoDuCoDau" value="{{ $taikhoan->SoDuCoDau == 0 ? '0' : number_format($taikhoan->SoDuCoDau, 0, ',', '.') . ' đ' }}"></td>
                         <td><input style="text-align: center;" type="checkbox" name="" id="CoDinhKhoan" value="{{ $taikhoan->CoDinhKhoan }}" <?= $taikhoan->CoDinhKhoan == 1 ? 'checked' : '' ?>></td>
                         <td><input style="width: 25px; text-align: center;" type="text" name="Cap" id="Cap" value="{{ $taikhoan->Cap }}"></td>
                         <td><input style="width: 115px; text-align: center;" type="date" id="NgaySoDu" name="NgaySoDu" value="{{ $taikhoan->NgaySoDu }}"></td>
@@ -87,9 +87,7 @@
             };
 
             isNewRowAdded = true;
-
         }
-
     }
 
     // Hàm xử lý thêm mới một tài khoản
@@ -102,7 +100,6 @@
         var coDinhKhoan = $("#coDinhKhoan").is(":checked") ? 1 : 0;
         var cap = $("#cap").val();
         var ngaySoDu = $("#ngaySoDu").val();
-
 
         $.ajax({
             method: 'POST',
@@ -125,9 +122,9 @@
                     toastr.success("Tạo tài khoản kế toán thành công");
                     console.log(response);
 
-                    // setTimeout(function() {
-                    //     location.reload();
-                    // }, 3100); // Đợi 3,1 giây trước khi reload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3100); // Đợi 3,1 giây trước khi reload
                 }
             },
             error: function(error) {
@@ -166,15 +163,6 @@
             success: function(response) {
                 // Xử lý phản hồi
                 toastr.success("Cập nhật tài khoản thành công");
-
-                //Đoạn code dưới đây thực thi sự cập nhật, tức hiển thị dữ liệu sau khi cập nhật mà không tải lại trang
-                // $("tr[data-id=" + id + "]").find("td:nth-child(1) input").val(TaiKhoan);
-                // $("tr[data-id=" + id + "]").find("td:nth-child(2) input").val(TenTaiKhoan);
-                // $("tr[data-id=" + id + "]").find("td:nth-child(3) input").val(SoDuNoDau);
-                // $("tr[data-id=" + id + "]").find("td:nth-child(4) input").val(SoDuCoDau);
-                // $("tr[data-id=" + id + "]").find("td:nth-child(5) input").val(CoDinhKhoan);
-                // $("tr[data-id=" + id + "]").find("td:nth-child(6) input").val(Cap);
-                // $("tr[data-id=" + id + "]").find("td:nth-child(7) input").val(NgaySoDu);
             },
             error: function(error) {
                 // Xử lý lỗi
