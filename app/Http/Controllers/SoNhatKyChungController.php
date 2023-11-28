@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ChungTuGhiSo;
 use App\Models\ChungTuGhiSoChiTiet;
+use App\Models\ChungTuNganHang;
+use App\Models\ChungTuNganHangChiTiet;
 use App\Models\PhieuChi;
 use App\Models\PhieuChiChiTiet;
 use App\Models\PhieuNhapHangHoa;
@@ -51,7 +53,9 @@ class SoNhatKyChungController extends Controller
                 return response()->json($sonhatky);
                 break;
 
-            case '':
+            case 'TG':
+                $sonhatky = ChungTuNganHang::get();
+                return response()->json($sonhatky);
                 break;
 
             default:
@@ -87,7 +91,9 @@ class SoNhatKyChungController extends Controller
                 return response()->json($TaiKhoanNo);
                 break;
 
-            case '':
+            case 'TG':
+                $TaiKhoanNo = ChungTuNganHangChiTiet::where('MaChungTu', $mchungtu)->value('TaiKhoanNo');
+                return response()->json($TaiKhoanNo);
                 break;
 
             default:
@@ -121,7 +127,9 @@ class SoNhatKyChungController extends Controller
                 $TaiKhoanCo = ChungTuGhiSoChiTiet::where('MaChungTu', $mchungtu)->value('TaiKhoanCo');
                 return response()->json($TaiKhoanCo);
                 break;
-            case '':
+            case 'TG':
+                $TaiKhoanCo = ChungTuNganHangChiTiet::where('MaChungTu', $mchungtu)->value('TaiKhoanCo');
+                return response()->json($TaiKhoanCo);
                 break;
 
             default:
@@ -155,7 +163,9 @@ class SoNhatKyChungController extends Controller
                 $SoTien = ChungTuGhiSoChiTiet::where('MaChungTu', $mchungtu)->value('SoTien');
                 return response()->json($SoTien);
                 break;
-            case '':
+            case 'TG':
+                $SoTien = ChungTuNganHangChiTiet::where('MaChungTu', $mchungtu)->value('SoTien');
+                return response()->json($SoTien);
                 break;
 
             default:

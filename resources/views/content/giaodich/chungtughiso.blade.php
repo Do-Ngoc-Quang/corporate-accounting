@@ -1027,7 +1027,7 @@
                     toastr.error("Vui lòng điền đầy đủ thông tin");
                     console.error("Error:", response.error);
                 } else {
-                    toastr.success("Tạo chứng từ ghi sổ thành công");
+                    toastr.success("Tạo chứng từ thành công");
                     console.log(response);
 
                     setTimeout(function() {

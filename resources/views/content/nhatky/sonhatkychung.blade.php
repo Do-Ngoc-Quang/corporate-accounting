@@ -147,7 +147,19 @@
                 break;
 
             case 'TG':
-
+                $.ajax({
+                    url: 'get_ChungTu',
+                    type: 'GET',
+                    data: {
+                        LoaiChungTu: selectedValue
+                    },
+                    success: function(data) {
+                        displayData(data, selectedValue);
+                    },
+                    error: function(error) {
+                        console.error('Đã xảy ra lỗi:', error);
+                    }
+                });
                 break;
             default:
                 break;
@@ -277,7 +289,26 @@
                     }
                     break;
 
-                case '':
+                case 'TG':
+                    row += '<td>' + (item.ThuChi == 2 ? item.MaKhachHang : '') + '</td>'; //Mã khách hàng nợ
+                    row += '<td>' + (item.ThuChi == 1 ? item.MaKhachHang : '') + '</td>'; //Mã khách hàng có
+                    //Tài khoản nợ - có
+                    try {
+                        //Tài khoản nợ
+                        var TaiKhoanNo = await getTaiKhoanNo(item);
+                        row += '<td>' + TaiKhoanNo + '</td>';
+
+                        //Tài khoản có
+                        var TaiKhoanCo = await getTaiKhoanCo(item);
+                        row += '<td>' + TaiKhoanCo + '</td>';
+
+                        //Số tiền
+                        var soTien = await getSoTien(item);
+                        row += '<td>' + soTien + '</td>';
+
+                    } catch (error) {
+                        console.error(error);
+                    }
                     break;
 
                 default:
