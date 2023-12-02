@@ -484,7 +484,7 @@
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+                // console.log(data);
 
                 //Vào từng object chứa khách hàng
                 data.forEach(khachhang => {

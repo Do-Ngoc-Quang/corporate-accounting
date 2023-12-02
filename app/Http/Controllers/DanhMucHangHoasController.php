@@ -87,5 +87,8 @@ class DanhMucHangHoasController extends Controller
     {
         $hanghoa = DanhMucHangHoa::pluck('MaHang');
         return response()->json($hanghoa);
+
+        // $hanghoa = DanhMucHangHoa::get();
+        // return response()->json($hanghoa);
     }
 }

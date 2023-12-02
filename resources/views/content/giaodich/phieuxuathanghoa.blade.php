@@ -203,7 +203,7 @@
                     </tbody>
                 </table>
                 <div id="section1-2">
-                   
+
                     <button class="btnAddnew" style="margin: 10px 20px 0 25%; width: 10%;" type="button" onclick="resetAndSetupValue()" id="btnLamMoi">Thêm mới</button>
                     <button class="btnAddnew" style="margin: 10px 20px 0 20px; width: 10%;" type="button" onclick="addNewPhieuXuatHangHoa()" id="btnTaoPhieu">Lưu</button>
                     <button class="btnAddnew" style="margin: 10px 20px 0 20px; width: 10%;" type="button" onclick="updatePhieuXuatHangHoa()" id="btnCapNhat" disabled>Cập nhật</button>
@@ -315,7 +315,10 @@
                     $("tr[data-id='trPhieuXuatHangHoa'] td input#soHoaDon").val(phieuxuathanghoa.SoHoaDon);
                     $("tr[data-id='trPhieuXuatHangHoa'] td input#ngayHoaDon").val(phieuxuathanghoa.NgayHoaDon);
                     $("tr[data-id='trPhieuXuatHangHoa'] td input#thueSuat").val(phieuxuathanghoa.ThueSuat);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#thueGTGT").val(parseFloat(phieuxuathanghoa.ThueGTGT).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
+                    $("tr[data-id='trPhieuXuatHangHoa'] td input#thueGTGT").val(parseFloat(phieuxuathanghoa.ThueGTGT).toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    }));
 
                     $("tr[data-id='trPhieuXuatHangHoa'] td input#id").val(phieuxuathanghoa.id);
 
@@ -454,7 +457,6 @@
 
         // Thay thế thẻ input bằng thẻ select
         replaceInputWithSelect();
-
     }
 
     // Hàm xử lý thẻ input soChungTu thay đổi text
@@ -530,7 +532,6 @@
                         });
                     });
                 });
-
             })
             .catch(error => {
                 // Xử lý lỗi
@@ -583,9 +584,6 @@
             var tableBody = document.getElementById("dataTableChiTiet").getElementsByTagName("tbody")[0];
             var newRow = tableBody.insertRow(tableBody.rows.length);
 
-            // Gán giá trị cho thuộc tính data-id
-            // newRow.setAttribute('data-id', 'dataTableChiTiet');
-
             var cell1 = newRow.insertCell(0);
             var cell2 = newRow.insertCell(1);
             var cell3 = newRow.insertCell(2);
@@ -595,7 +593,6 @@
             var cell7 = newRow.insertCell(6);
             var cell8 = newRow.insertCell(7);
             var cell9 = newRow.insertCell(8);
-            // var cell10 = newRow.insertCell(9);
 
             // Liệt kê danh sách mã hàng hóa cho khách hàng lựa chọn
             fetch('get_HangHoa')
@@ -625,7 +622,6 @@
             cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" readonly>`;
             cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" placeholder="Đơn giá bán" oninput="ThueGTGT_InputChange()">`;
             cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" readonly>`;
-            // cell8.innerHTML = `<input style=" text-align: center;" type="text" id="maChungTuNhap" placeholder="Mã chứng từ nhập">`;
 
             // Liệt kê danh sách mã chứng từ nhập hàng
             fetch('get_PhieuNhapHang')
@@ -648,8 +644,6 @@
                     // Handle errors
                     console.error('There was a problem with the fetch operation:', error);
                 });
-
-            // cell9.innerHTML = `<label></label>`;
 
             // Gán sự kiện click cho dòng mới
             newRow.onclick = function() {
