@@ -83,17 +83,6 @@
                 <div id="section1-1">
                     <table class="custom-table-showID" style="width: 100%;" id="dataTable_LoaiChungTu">
                         <thead>
-                            <!-- <tr>
-                                <th>
-                                    <select name="" id="select_loaiChungTu" style="width: 100%; text-align:center;" onfocus="select_loaiChungTu()">
-                                        <option value="default" disabled selected>Chọn loại chứng từ</option>
-                                        <option value="phieunhap">Phiếu nhập</option>
-                                        <option value="phieuxuat">Phiếu xuất</option>
-                                        <option value="phieunhaphangtralai">Phiếu nhập hàng trả lại</option>
-                                        <option value="phieuxuathangtralai">Phiếu xuất hàng trả lại</option>
-                                    </select>
-                                </th>
-                            </tr> -->
                             <tr>
                                 <th>Mã chứng từ</th>
                             </tr>
@@ -594,7 +583,10 @@
                     $("tr[data-id='trChungTuGhiSo'] td input#soHoaDon").val(chungtughiso.SoHoaDon);
                     $("tr[data-id='trChungTuGhiSo'] td input#ngayHoaDon").val(chungtughiso.NgayHoaDon);
                     $("tr[data-id='trChungTuGhiSo'] td input#thueSuat").val(chungtughiso.ThueSuat);
-                    $("tr[data-id='trChungTuGhiSo'] td input#thueGTGT").val(parseFloat(chungtughiso.ThueGTGT).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
+                    $("tr[data-id='trChungTuGhiSo'] td input#thueGTGT").val(parseFloat(chungtughiso.ThueGTGT).toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    }));
 
                     $("tr[data-id='trChungTuGhiSo'] td input#id").val(chungtughiso.id);
 

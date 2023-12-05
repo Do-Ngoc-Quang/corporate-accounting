@@ -4,9 +4,8 @@
 
 <div class="container-fluid">
     <div class="row">
-        <!-- Menu bên trái -->
+        <!-- Menu -->
         @include('menu.menu')
-
         <style>
             .card-body {
                 padding: 20px;
@@ -45,11 +44,11 @@
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">E-mail</label>
-                            <input class="form-control" type="text" id="email" name="email" value="{{$user->email}}"/>
+                            <input class="form-control" type="text" id="email" name="email" value="{{$user->email}}" />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">Họ và tên</label>
-                            <input class="form-control" type="text" id="name" name="name" value="{{$user->name}}"/>
+                            <input class="form-control" type="text" id="name" name="name" value="{{$user->name}}" />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="phoneNumber">Số điện thoại</label>
@@ -78,7 +77,6 @@
     avatarInput.addEventListener('change', function(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
-
         reader.onload = function(e) {
             avatarImg.src = e.target.result;
         };
@@ -90,37 +88,5 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-    // function update(id) {
-
-    //     var email = $("#email").val();
-    //     var name = $("#name").val();
-    //     var sodienthoai = $("#sodienthoai").val();
-    //     var diachi = $("#diachi").val();
-
-    //     console.log(email, name, sodienthoai, diachi);
-
-    //     $.ajax({
-    //         method: 'PUT',
-    //         url: '/user_update/' + id,
-    //         data: {
-    //             email: email,
-    //             name: name,
-    //             sodienthoai: sodienthoai,
-    //             diachi: diachi
-    //         },
-    //         success: function(response) {
-    //             console.log(response);
-    //             // Xử lý phản hồi
-    //             toastr.success("Cập nhật thành công");
-
-    //         },
-    //         error: function(error) {
-    //             toastr.error("Lỗi cập nhật");
-    //             console.log(error);
-    //         }
-    //     });
-    // }
 </script>
-
 @endsection
