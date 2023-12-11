@@ -594,54 +594,111 @@
             var cell8 = newRow.insertCell(7);
             var cell9 = newRow.insertCell(8);
 
-            // Liệt kê danh sách mã hàng hóa cho khách hàng lựa chọn
+            // Fetch dữ liệu, lấy toàn bộ thông tin của hàng hóa
             fetch('get_HangHoa')
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+                        throw new Error('Network response was not ok');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    // Tạo chuỗi HTML chứa thẻ select và các option
-                    var selectMaHang = '<select style="width: 100px; text-align: center;" id="maHang"; max-height: 50px; overflow-y: auto; >';
-                    for (var i = 0; i < data.length; i++) {
-                        selectMaHang += `<option value="${data[i]}">${data[i]}</option>`;
-                    }
-                    selectMaHang += '</select>';
-                    cell1.innerHTML = selectMaHang;
+                    console.log(data);
+
+                    //Vào từng object 
+                    data.forEach(hanghoa => {
+
+                        //Tạo chuỗi HTML chứa thẻ select và các option
+                        var selectMaHang = '<select style="width: 100px; text-align: center;" id="select_maHang"; max-height: 50px; overflow-y: auto; >';
+                        data.forEach(hh => {
+                            selectMaHang += `<option value="${hh.MaHang}">${hh.MaHang}</option>`;
+                        });
+                        selectMaHang += '</select>';
+                        cell1.innerHTML = selectMaHang;
+
+                        var selectElement = document.getElementById('select_maHang');
+
+                        // Thêm xử lý sự kiện change cho thẻ select
+                        selectElement.addEventListener("change", function() {
+                            var selectedValue = this.value;
+                            data.forEach(hh => {
+                                if (hh.MaHang == selectedValue) {
+                                    cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${hh.DonViTinh}" readonly>`;
+                                    cell3.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="soLuong" placeholder="${hh.SoLuongTonDau}" oninput="ThueGTGT_InputChange()">`;
+                                }
+                            });
+                        });
+                    });
                 })
                 .catch(error => {
-                    // Handle errors
+                    // Xử lý lỗi
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
-            cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" placeholder="Đơn vị tính">`;
-            cell3.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="soLuong" placeholder="Số lượng" oninput="ThueGTGT_InputChange()">`;
-            cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" placeholder="Đơn giá vốn" oninput="ThueGTGT_InputChange()">`;
             cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" readonly>`;
             cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" placeholder="Đơn giá bán" oninput="ThueGTGT_InputChange()">`;
             cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" readonly>`;
 
-            // Liệt kê danh sách mã chứng từ nhập hàng
+            // // Liệt kê danh sách mã chứng từ nhập hàng
+            // fetch('get_maPhieuNhapHang')
+            //     .then(response => {
+            //         if (!response.ok) {
+            //             throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+            //         }
+            //         return response.json();
+            //     })
+            //     .then(data => {
+            //         // Tạo chuỗi HTML chứa thẻ select và các option
+            //         var selectMaChungTu = '<select style="width: 150px; text-align: center;" id="maChungTuNhap"; max-height: 50px; overflow-y: auto; >';
+            //         for (var i = 0; i < data.length; i++) {
+            //             selectMaChungTu += `<option value="${data[i]}">${data[i]}</option>`;
+            //         }
+            //         selectMaChungTu += '</select>';
+            //         cell8.innerHTML = selectMaChungTu;
+            //     })
+            //     .catch(error => {
+            //         // Handle errors
+            //         console.error('There was a problem with the fetch operation:', error);
+            //     });
+
             fetch('get_PhieuNhapHang')
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+                        throw new Error('Network response was not ok');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    // Tạo chuỗi HTML chứa thẻ select và các option
-                    var selectMaChungTu = '<select style="width: 150px; text-align: center;" id="maChungTuNhap"; max-height: 50px; overflow-y: auto; >';
-                    for (var i = 0; i < data.length; i++) {
-                        selectMaChungTu += `<option value="${data[i]}">${data[i]}</option>`;
-                    }
-                    selectMaChungTu += '</select>';
-                    cell8.innerHTML = selectMaChungTu;
+                    console.log(data);
+
+                    //Vào từng object 
+                    data.forEach(phieunhap => {
+
+                        //Tạo chuỗi HTML chứa thẻ select và các option
+                        var selectMaHang = '<select style="width: 150px; text-align: center;" id="select_ChungTuNhap"; max-height: 50px; overflow-y: auto; >';
+                        data.forEach(pn => {
+                            selectMaHang += `<option value="${pn.MaChungTu}">${pn.MaChungTu}</option>`;
+                        });
+                        selectMaHang += '</select>';
+                        cell8.innerHTML = selectMaHang;
+
+                        var selectElement = document.getElementById('select_ChungTuNhap');
+
+                        // Thêm xử lý sự kiện change cho thẻ select
+                        selectElement.addEventListener("change", function() {
+                            var selectedValue = this.value;
+                            data.forEach(pn => {
+                                if (hh.MaHang == selectedValue) {
+                                    // cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh"  readonly>`;
+                                    cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${pn.DonGia}" oninput="ThueGTGT_InputChange()">`;
+
+                                }
+                            });
+                        });
+                    });
                 })
                 .catch(error => {
-                    // Handle errors
+                    // Xử lý lỗi
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
@@ -653,6 +710,8 @@
             isNewRow = true;
         }
     }
+
+
 
     // ----------------------------------------------------------------------------------------------------------------------------------------------------- //
     // Hàm xử lý thêm mới Phiếu chính (bảng chính)
@@ -721,7 +780,6 @@
                 ThueSuat: thueSuat,
                 ThueGTGT: thueGTGT,
 
-
                 // Bảng phụ
                 //Mã chứng từ đã tồn tại ở bảng chính, chỉ việc sử dụng - MaChungTu
                 MaHang: maHang,
@@ -752,7 +810,6 @@
                 console.log(error);
             }
         });
-
     }
 
 

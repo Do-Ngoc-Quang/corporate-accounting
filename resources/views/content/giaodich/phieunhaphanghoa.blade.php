@@ -577,7 +577,7 @@
             var cell5 = newRow.insertCell(4);
 
             // Liệt kê danh sách mã hàng hóa cho khách hàng lựa chọn
-            fetch('get_HangHoa')
+            fetch('get_maHangHoa')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Mạng không ổn định, không thể lấy dữ liệu');

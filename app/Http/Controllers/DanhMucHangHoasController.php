@@ -82,13 +82,17 @@ class DanhMucHangHoasController extends Controller
 
 
     // ------------------------------------------------------------------------------------------------------------------------------------------------- //
-    // Lấy thông tin hàng hóa
-    public function get_HangHoa()
+    // Lấy thông tin mã hàng hóa
+    public function get_maHangHoa()
     {
         $hanghoa = DanhMucHangHoa::pluck('MaHang');
         return response()->json($hanghoa);
+    }
 
-        // $hanghoa = DanhMucHangHoa::get();
-        // return response()->json($hanghoa);
+    //Lấy toàn bộ thông tin của hàng hóa
+    function get_HangHoa(){
+        $hanghoa = DanhMucHangHoa::get();
+
+        return response()->json($hanghoa);
     }
 }

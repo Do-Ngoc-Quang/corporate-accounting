@@ -63,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('danhmuchanghoa_delete/{id}', 'delete')->name('dmhh.delete');
 
         // Lấy mã hàng hóa
+        Route::get('get_maHangHoa', 'get_maHangHoa');
+
+        //Lấy toàn bộ thông tin hàng hóa
         Route::get('get_HangHoa', 'get_HangHoa');
     });
 
@@ -129,12 +132,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('phieunhaphanghoa_add', 'store')->name('phieunhaphanghoa.store');
         Route::put('phieunhaphanghoa_update/{id}', 'update');
 
-
         //Chi tiết phiếu nhập
         Route::get('phieunhaphanghoachitiet/{machungtu}', 'get_PhieuNhapHangHoaChiTiet');
         Route::put('phieunhaphanghoachitiet_update/{id}', 'phieunhaphanghoachitiet_update');
 
         //
+        Route::get('get_maPhieuNhapHang', 'get_maPhieuNhapHang');
         Route::get('get_PhieuNhapHang', 'get_PhieuNhapHang');
     });
 

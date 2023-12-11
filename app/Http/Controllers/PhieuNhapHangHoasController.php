@@ -171,7 +171,7 @@ class PhieuNhapHangHoasController extends Controller
             // ];
             // return response()->json($data);
 
-
+                
             return response()->json(['success']);
         } else {
             return response()->json(['error'], 400);
@@ -391,9 +391,15 @@ class PhieuNhapHangHoasController extends Controller
 
     // ---------------------------------------------------------------------------------------------------- //
     //Lấy thông tin phiếu nhập hàng - MaChungTu
-    public function get_PhieuNhapHang()
+    public function get_maPhieuNhapHang()
     {
         $phieunhaphang = PhieuNhapHangHoa::pluck('MaChungTu');
+        return response()->json($phieunhaphang);
+    }
+
+    //Lấy toàn bộ thông tin
+    function get_PhieuNhapHang(){
+        $phieunhaphang = PhieuNhapHangHoa::get();
         return response()->json($phieunhaphang);
     }
 }

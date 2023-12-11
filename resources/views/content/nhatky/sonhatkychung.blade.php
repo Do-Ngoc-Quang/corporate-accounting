@@ -164,7 +164,6 @@
             default:
                 break;
         }
-
     });
 
     function displayData(data, loaiChungTu) {
