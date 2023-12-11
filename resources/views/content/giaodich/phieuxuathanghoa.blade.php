@@ -219,11 +219,11 @@
                         <th style="width: 100px;">Mã hàng</th>
                         <th style="width: 90px;">Đơn vị tính</th>
                         <th style="width: 80px;">Số lượng</th>
+                        <th style="width: 150px;">Mã chứng từ nhập</th>
                         <th style="width: 150px;">Đơn giá vốn</th>
                         <th style="width: 150px;">Thành tiền giá vốn</th>
                         <th style="width: 150px;">Đơn giá bán</th>
                         <th style="width: 150px;">Thành tiền giá bán</th>
-                        <th style="width: 150px;">Mã chứng từ nhập</th>
                         <th style="width: 100px;">Tác vụ</th>
                     </tr>
                 </thead>
@@ -315,10 +315,7 @@
                     $("tr[data-id='trPhieuXuatHangHoa'] td input#soHoaDon").val(phieuxuathanghoa.SoHoaDon);
                     $("tr[data-id='trPhieuXuatHangHoa'] td input#ngayHoaDon").val(phieuxuathanghoa.NgayHoaDon);
                     $("tr[data-id='trPhieuXuatHangHoa'] td input#thueSuat").val(phieuxuathanghoa.ThueSuat);
-                    $("tr[data-id='trPhieuXuatHangHoa'] td input#thueGTGT").val(parseFloat(phieuxuathanghoa.ThueGTGT).toLocaleString('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
-                    }));
+                    $("tr[data-id='trPhieuXuatHangHoa'] td input#thueGTGT").val(phieuxuathanghoa.ThueGTGT);
 
                     $("tr[data-id='trPhieuXuatHangHoa'] td input#id").val(phieuxuathanghoa.id);
 
@@ -367,9 +364,9 @@
                     cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${phieuxuathanghoachitiet.DonViTinh}">`;
                     cell3.innerHTML = `<input style="width: 80px; text-align: center;" type="text" id="soLuong" value="${phieuxuathanghoachitiet.SoLuong}" oninput="ThueGTGT_InputChange()">`;
                     cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${phieuxuathanghoachitiet.DonGiaVon}" oninput="ThueGTGT_InputChange()">`;
-                    cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" value="${parseFloat(phieuxuathanghoachitiet.ThanhTienGiaVon).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}" readonly>`;
+                    cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" value="${phieuxuathanghoachitiet.ThanhTienGiaVon}" readonly>`;
                     cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" value="${phieuxuathanghoachitiet.DonGiaBan}" oninput="ThueGTGT_InputChange()">`;
-                    cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" value="${parseFloat(phieuxuathanghoachitiet.ThanhTienGiaBan).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}" readonly>`;
+                    cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" value="${phieuxuathanghoachitiet.ThanhTienGiaBan}" readonly>`;
                     cell8.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="maChungTuNhap" value="${phieuxuathanghoachitiet.MaChungTuNhap}" readonly>`;
                     cell9.innerHTML = `<button style="width: 100px;" type="button" onclick="updatePhieuXuatHangHoaChiTiet( '${phieuxuathanghoachitiet.id}')">Cập nhật</button>`;
 
@@ -635,9 +632,6 @@
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
-            cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" readonly>`;
-            cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" placeholder="Đơn giá bán" oninput="ThueGTGT_InputChange()">`;
-            cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" readonly>`;
 
             // // Liệt kê danh sách mã chứng từ nhập hàng
             // fetch('get_maPhieuNhapHang')
@@ -680,7 +674,7 @@
                             selectMaHang += `<option value="${pn.MaChungTu}">${pn.MaChungTu}</option>`;
                         });
                         selectMaHang += '</select>';
-                        cell8.innerHTML = selectMaHang;
+                        cell4.innerHTML = selectMaHang;
 
                         var selectElement = document.getElementById('select_ChungTuNhap');
 
@@ -688,10 +682,24 @@
                         selectElement.addEventListener("change", function() {
                             var selectedValue = this.value;
                             data.forEach(pn => {
-                                if (hh.MaHang == selectedValue) {
+                                if (pn.MaChungTu == selectedValue) {
                                     // cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh"  readonly>`;
-                                    cell4.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${pn.DonGia}" oninput="ThueGTGT_InputChange()">`;
-
+                                    
+                                    
+                                    fetch('get_DonGia/' + selectedValue)
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${data}" readonly">`;
+                                        })
+                                        .catch(error => {
+                                            // Handle errors
+                                            console.error('There was a problem with the fetch operation:', error);
+                                        });
                                 }
                             });
                         });
@@ -701,6 +709,10 @@
                     // Xử lý lỗi
                     console.error('There was a problem with the fetch operation:', error);
                 });
+
+            cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" readonly>`;
+            cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" placeholder="Đơn giá bán" oninput="ThueGTGT_InputChange()">`;
+            cell8.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaBan" readonly>`;
 
             // Gán sự kiện click cho dòng mới
             newRow.onclick = function() {

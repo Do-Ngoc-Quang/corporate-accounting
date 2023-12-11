@@ -139,6 +139,7 @@ Route::middleware(['auth'])->group(function () {
         //
         Route::get('get_maPhieuNhapHang', 'get_maPhieuNhapHang');
         Route::get('get_PhieuNhapHang', 'get_PhieuNhapHang');
+        Route::get('get_DonGia/{machungtu}', 'get_DonGia');
     });
 
     //Phiếu xuất hàng hóa

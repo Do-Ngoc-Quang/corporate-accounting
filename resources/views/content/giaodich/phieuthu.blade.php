@@ -346,7 +346,7 @@
                     var cell5 = newRow.insertCell(4);
 
                     cell1.innerHTML = `<textarea style="width: 580px" cols="30" rows="3" id="dienGiaiChiTiet">${phieuthuchitiet.DienGiaiChiTiet}</textarea>`;
-                    cell2.innerHTML = `<input style="width: 245px; text-align: center;" type="text" id="soTien" value="${parseFloat(phieuthuchitiet.SoTien).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}">`;
+                    cell2.innerHTML = `<input style="width: 245px; text-align: center;" type="text" id="soTien" value="${phieuthuchitiet.SoTien}">`;
                     cell3.innerHTML = `<input style="width: 110px; text-align: center;" type="text" id="taiKhoanNo" value="${phieuthuchitiet.TaiKhoanNo}" readonly>`;
                     cell4.innerHTML = `<input style="width: 110px; text-align: center;" type="text" id="taiKhoanCo" value="${phieuthuchitiet.TaiKhoanCo}" readonly>`;
                     cell5.innerHTML = `<button type="button" onclick="updatePhieuThuChiTiet( '${phieuthuchitiet.id}')">Cập nhật</button>`;

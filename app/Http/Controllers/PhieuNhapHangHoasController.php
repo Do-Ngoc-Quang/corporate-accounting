@@ -29,6 +29,7 @@ class PhieuNhapHangHoasController extends Controller
     //Hàm xử lý tạo mới 
     public function store(Request $request)
     {
+        
         $exist_PhieuNhapHangHoa = PhieuNhapHangHoa::where('MaChungTu', $request->MaChungTu)->value('MaChungTu');
 
         //Kiểm tra xem đã tồn tại trong database chưa
@@ -149,29 +150,29 @@ class PhieuNhapHangHoasController extends Controller
 
 
             //Kiểm thử dữ liệu
-            // $data = [
-            //     //     '$id_TaiKhoan_No' => $id_TaiKhoan_No,
-            //     //     '$id_TaiKhoan_Co' => $id_TaiKhoan_Co,
-            //     //     '$id_TaiKhoanNoGTGT' => $id_TaiKhoanNoGTGT,
-            //     //     '$SoDuNoDau' => $SoDuNoDau,
-            //     //     '$SoDuNoDau_GTGT' => $SoDuNoDau_GTGT,
-            //     //     '$SoDuCoDau' => $SoDuCoDau,
-            //     //     '$temp_SoDuNoDau' => $temp_SoDuNoDau,
-            //     //     '$temp_SoDuNoDau_GTGT' => $temp_SoDuNoDau_GTGT,
-            //     //     '$temp_SoDuCoDau' => $temp_SoDuCoDau,
+            $data = [
+                    '$id_TaiKhoan_No' => $id_TaiKhoan_No,
+                    '$id_TaiKhoan_Co' => $id_TaiKhoan_Co,
+                    '$id_TaiKhoanNoGTGT' => $id_TaiKhoanNoGTGT,
+                    '$SoDuNoDau' => $SoDuNoDau,
+                    '$SoDuNoDau_GTGT' => $SoDuNoDau_GTGT,
+                    '$SoDuCoDau' => $SoDuCoDau,
+                    '$temp_SoDuNoDau' => $temp_SoDuNoDau,
+                    '$temp_SoDuNoDau_GTGT' => $temp_SoDuNoDau_GTGT,
+                    '$temp_SoDuCoDau' => $temp_SoDuCoDau,
 
 
-            //     // '$id_HangHoa' => $id_HangHoa,
-            //     // '$SoLuongTonDau' => $SoLuongTonDau,
-            //     // '$ThanhTienTonDau' => $ThanhTienTonDau,
-            //     // '$request->SoLuong' => $request->SoLuong,
-            //     // '$request->ThanhTien' => $request->ThanhTien,
-            //     // '$temp_SoLuongTonDau' => $temp_SoLuongTonDau,
-            //     // '$temp_ThanhTienTonDau' => $temp_ThanhTienTonDau,
-            // ];
-            // return response()->json($data);
+                '$id_HangHoa' => $id_HangHoa,
+                '$SoLuongTonDau' => $SoLuongTonDau,
+                '$ThanhTienTonDau' => $ThanhTienTonDau,
+                '$request->SoLuong' => $request->SoLuong,
+                '$request->ThanhTien' => $request->ThanhTien,
+                '$temp_SoLuongTonDau' => $temp_SoLuongTonDau,
+                '$temp_ThanhTienTonDau' => $temp_ThanhTienTonDau,
+            ];
+            return response()->json($data);
 
-                
+
             return response()->json(['success']);
         } else {
             return response()->json(['error'], 400);
@@ -242,7 +243,7 @@ class PhieuNhapHangHoasController extends Controller
             //     'ThueGTGT_in_database' => $ThueGTGT_in_database,
             //     'request->ThueGTGT' => $request->ThueGTGT
             // ];
-            // return response()->json($data);
+            return response()->json($request);
 
             return response()->json(['success']);
         } else {
@@ -401,5 +402,12 @@ class PhieuNhapHangHoasController extends Controller
     function get_PhieuNhapHang(){
         $phieunhaphang = PhieuNhapHangHoa::get();
         return response()->json($phieunhaphang);
+    }
+
+    // Lấy đơn giá
+    public function get_DonGia($machungtu)
+    {
+        $dongia = PhieuNhapHangHoaChiTiet::where('MaChungTu', $machungtu)->value('DonGia');
+        return response()->json($dongia);
     }
 }
