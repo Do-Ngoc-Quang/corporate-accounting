@@ -632,7 +632,6 @@
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
-
             // // Liệt kê danh sách mã chứng từ nhập hàng
             // fetch('get_maPhieuNhapHang')
             //     .then(response => {
@@ -684,8 +683,8 @@
                             data.forEach(pn => {
                                 if (pn.MaChungTu == selectedValue) {
                                     // cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh"  readonly>`;
-                                    
-                                    
+
+
                                     fetch('get_DonGia/' + selectedValue)
                                         .then(response => {
                                             if (!response.ok) {
@@ -694,7 +693,7 @@
                                             return response.json();
                                         })
                                         .then(data => {
-                                            cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${data}" readonly">`;
+                                            cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${data}" readonly>`;
                                         })
                                         .catch(error => {
                                             // Handle errors
