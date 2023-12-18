@@ -26,9 +26,9 @@
                     @foreach($danhmuchanghoa as $hanghoa)
                     <tr data-id="{{ $hanghoa->MaHang }}" id="{{ $hanghoa->MaHang }}" onclick="highlightRow(this)">
                         <td><input style="width: 100px; text-align: center;" readonly type="text" id="MaHang" value="{{ $hanghoa->MaHang }}"></td>
-                        <td><input style="width: 370px; text-align: center;" type="text" id="TenHang" value="{{ $hanghoa->TenHang }}"></td>
+                        <td><input style="width: 350px; text-align: center;" type="text" id="TenHang" value="{{ $hanghoa->TenHang }}"></td>
                         <td><input style="width: 100px; text-align: center;" type="text" id="NhomHang" value="{{ $hanghoa->NhomHang }}"></td>
-                        <td><input style="width: 40px; text-align: center;" type="text" id="DonViTinh" value="{{ $hanghoa->DonViTinh }}"></td>
+                        <td><input style="width: 60px; text-align: center;" type="text" id="DonViTinh" value="{{ $hanghoa->DonViTinh }}"></td>
                         <td><input style="width: 100px; text-align: center;" readonly type="text" id="SoLuongTonDau" value="{{ $hanghoa->SoLuongTonDau }}"></td>
                         <td><input style="width: 150px; text-align: center;" readonly type="text" id="ThanhTienTonDau" value="{{ $hanghoa->ThanhTienTonDau }}"></td>
                         <td><input style="width: 115px; text-align: center;" type="date" id="NgayTonDau" value="{{ $hanghoa->NgayTonDau }}"></td>
@@ -73,9 +73,9 @@
             var cell8 = newRow.insertCell(7);
 
             cell1.innerHTML = '<input style="width: 100px; text-align: center;" type="text" id="maHang" placeholder="Mã hàng">';
-            cell2.innerHTML = '<input style="width: 370px; text-align: center;" type="text" id="tenHang" placeholder="Tên hàng">';
+            cell2.innerHTML = '<input style="width: 350px; text-align: center;" type="text" id="tenHang" placeholder="Tên hàng">';
             cell3.innerHTML = '<input style="width: 100px; text-align: center;" type="text" id="nhomHang" placeholder="Nhóm">';
-            cell4.innerHTML = '<input style="width: 40px; text-align: center;" type="text" id="donViTinh" placeholder="đvt">';
+            cell4.innerHTML = '<input style="width: 60px; text-align: center;" type="text" id="donViTinh" placeholder="đvt">';
             cell5.innerHTML = '<input style="width: 100px; text-align: center;" readonly type="text" id="soLuongTonDau" value="0">';
             cell6.innerHTML = '<input style="width: 150px; text-align: center;" readonly type="text" id="thanhTienTonDau" value="0">';
             cell7.innerHTML = '<input style="width: 115px; text-align: center;" type="date" id="ngayTonDau">';

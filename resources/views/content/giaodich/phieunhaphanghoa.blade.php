@@ -576,30 +576,76 @@
             var cell4 = newRow.insertCell(3);
             var cell5 = newRow.insertCell(4);
 
-            // Liệt kê danh sách mã hàng hóa cho khách hàng lựa chọn
-            fetch('get_maHangHoa')
+            // // Liệt kê danh sách mã hàng hóa cho khách hàng lựa chọn
+            // fetch('get_maHangHoa')
+            //     .then(response => {
+            //         if (!response.ok) {
+            //             throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+            //         }
+            //         return response.json();
+            //     })
+            //     .then(data => {
+            //         // Tạo chuỗi HTML chứa thẻ select và các option
+            //         var selectMaHang = '<select style="width: 200px; text-align: center;" id="maHang"; max-height: 50px; overflow-y: auto; >';
+            //         for (var i = 0; i < data.length; i++) {
+            //             selectMaHang += `<option value="${data[i]}">${data[i]}</option>`;
+            //         }
+            //         selectMaHang += '</select>';
+            //         cell1.innerHTML = selectMaHang;
+            //     })
+            //     .catch(error => {
+            //         // Handle errors
+            //         console.error('There was a problem with the fetch operation:', error);
+            //     });
+
+            var newRow2 = tableBody.insertRow(tableBody.rows.length);
+            var cell2_1 = newRow2.insertCell(0);
+            var cell2_2 = newRow2.insertCell(1);
+            cell2_2.colSpan = 3;
+
+            cell2_1.innerHTML = `<label>H/Hóa:</lable>`;
+
+            // Fetch dữ liệu, lấy toàn bộ thông tin của hàng hóa
+            fetch('get_HangHoa')
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+                        throw new Error('Network response was not ok');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    // Tạo chuỗi HTML chứa thẻ select và các option
-                    var selectMaHang = '<select style="width: 200px; text-align: center;" id="maHang"; max-height: 50px; overflow-y: auto; >';
-                    for (var i = 0; i < data.length; i++) {
-                        selectMaHang += `<option value="${data[i]}">${data[i]}</option>`;
-                    }
-                    selectMaHang += '</select>';
-                    cell1.innerHTML = selectMaHang;
+                    console.log(data);
+
+                    //Vào từng object 
+                    data.forEach(hanghoa => {
+
+                        //Tạo chuỗi HTML chứa thẻ select và các option
+                        var selectMaHang = '<select style="width: 100px; text-align: center;" id="maHang"; max-height: 50px; overflow-y: auto; >';
+                        data.forEach(hh => {
+                            selectMaHang += `<option value="${hh.MaHang}">${hh.MaHang}</option>`;
+                        });
+                        selectMaHang += '</select>';
+                        cell1.innerHTML = selectMaHang;
+
+                        var selectElement = document.getElementById('maHang');
+
+                        // Thêm xử lý sự kiện change cho thẻ select
+                        selectElement.addEventListener("change", function() {
+                            var selectedValue = this.value;
+                            data.forEach(hh => {
+                                if (hh.MaHang == selectedValue) {
+                                    cell2.innerHTML = `<input style="width: 200px; text-align: center;" type="text" id="donViTinh" value="${hh.DonViTinh}" readonly >`;
+                                    cell2_2.innerHTML = `<label>${hh.TenHang}</lable>`;
+                                }
+                            });
+                        });
+                    });
                 })
                 .catch(error => {
-                    // Handle errors
+                    // Xử lý lỗi
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
-
-            cell2.innerHTML = `<input style="width: 200px; text-align: center;" type="text" id="donViTinh" placeholder="Đơn vị tính">`;
             cell3.innerHTML = `<input style="width: 200px; text-align: center;" type="text" id="soLuong" placeholder="Số lượng" oninput="ThueGTGT_InputChange()">`;
             cell4.innerHTML = `<input style="width: 200px; text-align: center;" type="text" id="donGia" placeholder="Đơn giá" oninput="ThueGTGT_InputChange()">`;
             cell5.innerHTML = `<input style="width: 200px; text-align: center;" type="text" id="thanhTien" placeholder="Thành tiền" >`;
@@ -780,7 +826,7 @@
         // console.log(taiKhoanCo);
         // console.log(thueGTGT);
 
-        
+
         $.ajax({
             method: 'PUT',
             url: '/phieunhaphanghoachitiet_update/' + id,

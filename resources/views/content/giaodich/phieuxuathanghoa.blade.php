@@ -591,6 +591,12 @@
             var cell8 = newRow.insertCell(7);
             var cell9 = newRow.insertCell(8);
 
+            var newRow2 = tableBody.insertRow(tableBody.rows.length);
+            var cell2_1 = newRow2.insertCell(0);
+            var cell2_2 = newRow2.insertCell(1);
+            cell2_2.colSpan = 3;
+            cell2_1.innerHTML = `<label>Tên H/Hóa:</lable>`;
+
             // Fetch dữ liệu, lấy toàn bộ thông tin của hàng hóa
             fetch('get_HangHoa')
                 .then(response => {
@@ -606,14 +612,14 @@
                     data.forEach(hanghoa => {
 
                         //Tạo chuỗi HTML chứa thẻ select và các option
-                        var selectMaHang = '<select style="width: 100px; text-align: center;" id="select_maHang"; max-height: 50px; overflow-y: auto; >';
+                        var selectMaHang = '<select style="width: 100px; text-align: center;" id="maHang"; max-height: 50px; overflow-y: auto; >';
                         data.forEach(hh => {
                             selectMaHang += `<option value="${hh.MaHang}">${hh.MaHang}</option>`;
                         });
                         selectMaHang += '</select>';
                         cell1.innerHTML = selectMaHang;
 
-                        var selectElement = document.getElementById('select_maHang');
+                        var selectElement = document.getElementById('maHang');
 
                         // Thêm xử lý sự kiện change cho thẻ select
                         selectElement.addEventListener("change", function() {
@@ -622,6 +628,7 @@
                                 if (hh.MaHang == selectedValue) {
                                     cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${hh.DonViTinh}" readonly>`;
                                     cell3.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="soLuong" placeholder="${hh.SoLuongTonDau}" oninput="ThueGTGT_InputChange()">`;
+                                    cell2_2.innerHTML = `<label>${hh.TenHang}</lable>`;
                                 }
                             });
                         });
@@ -654,6 +661,7 @@
             //         console.error('There was a problem with the fetch operation:', error);
             //     });
 
+            // Liệt kê danh sách mã chứng từ nhập hàng
             fetch('get_PhieuNhapHang')
                 .then(response => {
                     if (!response.ok) {
@@ -668,14 +676,14 @@
                     data.forEach(phieunhap => {
 
                         //Tạo chuỗi HTML chứa thẻ select và các option
-                        var selectMaHang = '<select style="width: 150px; text-align: center;" id="select_ChungTuNhap"; max-height: 50px; overflow-y: auto; >';
+                        var selectMaHang = '<select style="width: 150px; text-align: center;" id="maChungTuNhap"; max-height: 50px; overflow-y: auto; >';
                         data.forEach(pn => {
                             selectMaHang += `<option value="${pn.MaChungTu}">${pn.MaChungTu}</option>`;
                         });
                         selectMaHang += '</select>';
                         cell4.innerHTML = selectMaHang;
 
-                        var selectElement = document.getElementById('select_ChungTuNhap');
+                        var selectElement = document.getElementById('maChungTuNhap');
 
                         // Thêm xử lý sự kiện change cho thẻ select
                         selectElement.addEventListener("change", function() {
