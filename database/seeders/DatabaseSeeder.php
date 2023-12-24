@@ -1923,7 +1923,7 @@ class DatabaseSeeder extends Seeder
             'SoDuNoDau' => 0,
             'SoDuCoDau' => 0,
             'CoDinhKhoan' => false,
-            'Cap' => '',
+            'Cap' => '1',
             'NgaySoDu' => now(),
         ]);
 

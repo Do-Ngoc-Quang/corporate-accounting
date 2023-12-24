@@ -304,8 +304,6 @@
                     $("tr[data-id='trPhieuThu'] td input#thueSuat").val(phieuthu.ThueSuat);
                     $("tr[data-id='trPhieuThu'] td input#matHang").val(phieuthu.MatHang);
                     $("tr[data-id='trPhieuThu'] td input#id").val(phieuthu.id);
-
-
                 });
 
             })
@@ -590,8 +588,8 @@
         var taiKhoanNo = $("#taiKhoanNo").val();
         var taiKhoanCo = $("#taiKhoanCo").val();
 
-        console.log(maChungTu);
-        console.log(maKhachHang);
+        // console.log(maChungTu);
+        // console.log(maKhachHang);
 
         $.ajax({
             method: 'POST',
@@ -669,24 +667,24 @@
         var matHang = $("#matHang").val();
 
 
-        console.log(id);
-        // console.log(maChungTu);
-        // console.log(loaiChungTu);
-        console.log(ngayChungTu);
-        // console.log(soChungTu);
-        console.log(hoTen);
-        console.log(diaChi);
-        console.log(soChungTuGoc);
-        console.log(maKhachHang);
-        console.log(tenKhachHang);
-        console.log(maSoThue);
-        console.log(dienGiai);
-        console.log(bieuThue);
-        console.log(soXeRy);
-        console.log(soHoaDon);
-        console.log(ngayHoaDon);
-        console.log(thueSuat);
-        console.log(matHang);
+        // console.log(id);
+        // // console.log(maChungTu);
+        // // console.log(loaiChungTu);
+        // console.log(ngayChungTu);
+        // // console.log(soChungTu);
+        // console.log(hoTen);
+        // console.log(diaChi);
+        // console.log(soChungTuGoc);
+        // console.log(maKhachHang);
+        // console.log(tenKhachHang);
+        // console.log(maSoThue);
+        // console.log(dienGiai);
+        // console.log(bieuThue);
+        // console.log(soXeRy);
+        // console.log(soHoaDon);
+        // console.log(ngayHoaDon);
+        // console.log(thueSuat);
+        // console.log(matHang);
 
 
         $.ajax({
