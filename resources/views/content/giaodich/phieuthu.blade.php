@@ -198,6 +198,7 @@
                 <div id="section1-2">
                     <button class="btnAddnew" style="margin: 7px 20px 0 35%; width: 10%;" type="button" onclick="resetAndSetupValue()" id="btnLamMoi">Thêm mới</button>
                     <button class="btnAddnew" style="margin-top: 7px; width: 10%;" type="button" onclick="addNewPhieuThu()" id="btnTaoPhieuThu">Lưu</button>
+                    <!-- <a href="phieuthu-baocao" target="_blank">Tạo báo cáo</a> -->
                 </div>
             </div>
         </div>

@@ -85,7 +85,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item dropdown-submenu">
+            <!-- <li class="nav-item dropdown-submenu">
                 <a class="nav-link navlink" href="#" data-bs-toggle="collapse" data-bs-target="#submenuBaoCao" aria-expanded="false">
                     <span class="fw-bold">BÁO CÁO</span>
                     <i class="fa-duotone fa-caret-down"></i>
@@ -93,11 +93,11 @@
    
                 <ul class="collapse list-unstyled submenu-padding" id="submenuBaoCao">
                     <li class="nav-item">
-                        <a class="nav-link navlink" href="{{ url('/baocao') }}">
+                        <a class="nav-link navlink" href="{{ url('/baocao-chungtu') }}">
                             Báo cáo phiếu thu
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link navlink" href="{{ url('/baocaotonkho') }}">
                             Tồn kho
                         </a>
@@ -111,9 +111,9 @@
                         <a class="nav-link navlink" href="{{ url('/baocaodoanhsobanhang') }}">
                             Doanh số bán hàng
                         </a>
-                    </li> -->
+                    </li>
                 </ul>
-            </li>
+            </li> -->
 
             <!-- <li class="nav-item dropdown-submenu">
                 <a class="nav-link navlink" href="#" data-bs-toggle="collapse" data-bs-target="#submenuKetChuyen" aria-expanded="false">

@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="row-col-10">
                                     <div class="label-col-10">Mặt hàng:</div>
-                                    <div class="input-col-10"><input style="margin-left: 34px; width: 210px;" type="text" id="matHang"></div>
+                                    <div class="input-col-10"><input style="margin-left: 34px; width: 210px;" type="text" id="matHang" readonly></div>
                                 </div>
                                 <div class="row-col-10">
                                     <div class="label-col-10">Số seri:</div>
@@ -617,7 +617,7 @@
             var cell2_1 = newRow2.insertCell(0);
             var cell2_2 = newRow2.insertCell(1);
             cell2_2.colSpan = 3;
-            cell2_1.innerHTML = `<label>Tên H/Hóa:</lable>`;
+            cell2_1.innerHTML = `<label>Mặt hàng:</lable>`;
 
             // Fetch dữ liệu, lấy toàn bộ thông tin của hàng hóa
             fetch('get_HangHoa')
@@ -651,6 +651,8 @@
                                     cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${hh.DonViTinh}" readonly >`;
                                     cell3.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="soLuong" placeholder="${hh.SoLuongTonDau}" oninput="ThueGTGT_InputChange()">`;
                                     cell2_2.innerHTML = `<label>${hh.TenHang}</lable>`;
+
+                                    $("tr[data-id='trChungTu'] td input#matHang").val(hh.TenHang);
                                 }
                             });
                         });

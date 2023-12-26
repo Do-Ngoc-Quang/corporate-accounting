@@ -11,13 +11,17 @@ use Illuminate\Support\Facades\Validator;
 class PhieuThusController extends Controller
 {
     //Phiếu thu
-
     public function index()
     {
         $phieuthu = PhieuThu::get();
         return view('content.giaodich.phieuthu', compact('phieuthu'));
     }
 
+    public function index_baocao()
+    {   
+        $data = PhieuThu::get();
+        return view('content.baocao.baocao', compact('data'));       
+    }
 
     public function get_PhieuThu($machungtu)
     {

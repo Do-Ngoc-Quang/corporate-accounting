@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DanhMucTaiKhoansController;
 use App\Http\Controllers\DanhMucKhachHangVaTaiKhoanCongNosController;
 use App\Http\Controllers\DanhMucHangHoasController;
@@ -238,12 +239,7 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('get_PC', 'get_PC');
     });
 
-    // Báo cáo
-    Route::controller(ReportsController::class)->group(function () {
-        Route::get('baocao', 'index');
 
-    });
-    
 
     //Phân quyền
     Route::controller(PhanQuyenController::class)->group(function () {
