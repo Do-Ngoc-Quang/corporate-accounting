@@ -9,7 +9,7 @@ class PhieuXuatHangTraLaiChiTiet extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'MaChungTu', 'MaHang', 'DonViTinh', 'SoLuong', 'DonGiaVon', 'ThanhTienGiaVon', 'DonGiaMua', 
+        'MaChungTu', 'MaHang', 'DonViTinh', 'SoLuong', 'DonGiaVon', 'ThanhTienGiaVon', 'DonGiaMua',
         'ThanhTienGiaMua', 'MaChungTuNhap'
     ];
 }

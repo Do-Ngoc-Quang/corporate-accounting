@@ -18,6 +18,7 @@ use App\Http\Controllers\PhieuNhapHangTraLaiController;
 use App\Http\Controllers\PhieuXuatHangTraLaiController;
 use App\Http\Controllers\SoNhatKyChungController;
 use App\Http\Controllers\USERController;
+use App\Http\Controllers\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -236,6 +237,13 @@ Route::middleware(['auth'])->group(function () {
         //Phiếu chi
         // Route::get('get_PC', 'get_PC');
     });
+
+    // Báo cáo
+    Route::controller(ReportsController::class)->group(function () {
+        Route::get('baocao', 'index');
+
+    });
+    
 
     //Phân quyền
     Route::controller(PhanQuyenController::class)->group(function () {
