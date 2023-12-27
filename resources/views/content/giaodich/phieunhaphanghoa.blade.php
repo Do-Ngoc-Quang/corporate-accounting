@@ -621,6 +621,7 @@
 
                         //Tạo chuỗi HTML chứa thẻ select và các option
                         var selectMaHang = '<select style="width: 100px; text-align: center;" id="maHang"; max-height: 50px; overflow-y: auto; >';
+                        selectMaHang += `<option value="#" selected disabled>Mã hàng</option>`;
                         data.forEach(hh => {
                             selectMaHang += `<option value="${hh.MaHang}">${hh.MaHang}</option>`;
                         });

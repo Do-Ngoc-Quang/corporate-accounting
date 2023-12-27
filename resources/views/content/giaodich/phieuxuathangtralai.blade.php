@@ -224,11 +224,12 @@
                         <th style="width: 100px;">Mã hàng</th>
                         <th style="width: 90px;">Đơn vị tính</th>
                         <th style="width: 100px;">Số lượng</th>
+                        <th style="width: 150px;">Mã chứng từ nhập</th>
                         <th style="width: 150px;">Đơn giá vốn</th>
                         <th style="width: 150px;">Thành tiền giá vốn</th>
                         <th style="width: 150px;">Đơn giá bán</th>
                         <th style="width: 150px;">Thành tiền giá bán</th>
-                        <th style="width: 150px;">Mã chứng từ nhập</th>
+
                         <th style="width: 100px;">Tác vụ</th>
                     </tr>
                 </thead>
@@ -619,6 +620,9 @@
             cell2_2.colSpan = 3;
             cell2_1.innerHTML = `<label>Mặt hàng:</lable>`;
 
+            //---
+            var mahang;
+
             // Fetch dữ liệu, lấy toàn bộ thông tin của hàng hóa
             fetch('get_HangHoa')
                 .then(response => {
@@ -635,6 +639,7 @@
 
                         //Tạo chuỗi HTML chứa thẻ select và các option
                         var selectMaHang = '<select style="width: 100px; text-align: center;" id="maHang"; max-height: 50px; overflow-y: auto; >';
+                        selectMaHang += `<option value="#" selected disabled>Mã hàng</option>`;
                         data.forEach(hh => {
                             selectMaHang += `<option value="${hh.MaHang}">${hh.MaHang}</option>`;
                         });
@@ -648,67 +653,72 @@
                             var selectedValue = this.value;
                             data.forEach(hh => {
                                 if (hh.MaHang == selectedValue) {
+                                    // --
+                                    mahang = hh.MaHang;
+
                                     cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${hh.DonViTinh}" readonly >`;
                                     cell3.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="soLuong" placeholder="${hh.SoLuongTonDau}" oninput="ThueGTGT_InputChange()">`;
                                     cell2_2.innerHTML = `<label>${hh.TenHang}</lable>`;
 
                                     $("tr[data-id='trChungTu'] td input#matHang").val(hh.TenHang);
-                                }
-                            });
-                        });
-                    });
-                })
-                .catch(error => {
-                    // Xử lý lỗi
-                    console.error('There was a problem with the fetch operation:', error);
-                });
 
-            
-
-            // Liệt kê danh sách mã chứng từ nhập hàng
-            fetch('get_PhieuNhapHang')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data);
-
-                    //Vào từng object 
-                    data.forEach(phieunhap => {
-
-                        //Tạo chuỗi HTML chứa thẻ select và các option
-                        var selectMaHang = '<select style="width: 150px; text-align: center;" id="maChungTuNhap"; max-height: 50px; overflow-y: auto; >';
-                        data.forEach(pn => {
-                            selectMaHang += `<option value="${pn.MaChungTu}">${pn.MaChungTu}</option>`;
-                        });
-                        selectMaHang += '</select>';
-                        cell4.innerHTML = selectMaHang;
-
-                        var selectElement = document.getElementById('maChungTuNhap');
-
-                        // Thêm xử lý sự kiện change cho thẻ select
-                        selectElement.addEventListener("change", function() {
-                            var selectedValue = this.value;
-                            data.forEach(pn => {
-                                if (pn.MaChungTu == selectedValue) {
-                                    // cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh"  readonly>`;
-
-
-                                    fetch('get_DonGia/' + selectedValue)
+                                    //--
+                                    // Liệt kê danh sách mã chứng từ nhập hàng
+                                    fetch('get_PhieuNhapHang')
                                         .then(response => {
                                             if (!response.ok) {
-                                                throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+                                                throw new Error('Network response was not ok');
                                             }
                                             return response.json();
                                         })
                                         .then(data => {
-                                            cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${data}" readonly>`;
+                                            console.log(data);
+
+                                            //Vào từng object 
+                                            data.forEach(phieunhaptralai => {
+
+                                                //Tạo chuỗi HTML chứa thẻ select và các option
+                                                var selectMaHang = '<select style="width: 150px; text-align: center;" id="maChungTuNhap"; max-height: 50px; overflow-y: auto; >';
+                                                selectMaHang += `<option value="#" selected disabled>Chứng từ nhập</option>`;
+                                                data.forEach(pn => {
+                                                    if (pn.MaHang == mahang) {
+                                                        selectMaHang += `<option value="${pn.MaChungTu}">${pn.MaChungTu}</option>`;
+                                                    }
+                                                });
+                                                selectMaHang += '</select>';
+                                                cell4.innerHTML = selectMaHang;
+
+                                                var selectElement = document.getElementById('maChungTuNhap');
+
+                                                // Thêm xử lý sự kiện change cho thẻ select
+                                                selectElement.addEventListener("change", function() {
+                                                    var selectedValue = this.value;
+                                                    data.forEach(pn => {
+                                                        if (pn.MaChungTu == selectedValue) {
+
+                                                            cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${pn.DonGia}" readonly>`;
+
+                                                            // fetch('get_DonGia/' + selectedValue)
+                                                            //     .then(response => {
+                                                            //         if (!response.ok) {
+                                                            //             throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+                                                            //         }
+                                                            //         return response.json();
+                                                            //     })
+                                                            //     .then(data => {
+                                                            //         cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${data}" readonly>`;
+                                                            //     })
+                                                            //     .catch(error => {
+                                                            //         // Handle errors
+                                                            //         console.error('There was a problem with the fetch operation:', error);
+                                                            //     });
+                                                        }
+                                                    });
+                                                });
+                                            });
                                         })
                                         .catch(error => {
-                                            // Handle errors
+                                            // Xử lý lỗi
                                             console.error('There was a problem with the fetch operation:', error);
                                         });
                                 }
@@ -720,6 +730,10 @@
                     // Xử lý lỗi
                     console.error('There was a problem with the fetch operation:', error);
                 });
+
+
+
+
 
             cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" readonly>`;
             cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaMua" placeholder="Đơn giá bán" oninput="ThueGTGT_InputChange()">`;

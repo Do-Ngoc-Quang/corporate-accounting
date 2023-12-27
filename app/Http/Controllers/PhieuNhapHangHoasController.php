@@ -392,17 +392,23 @@ class PhieuNhapHangHoasController extends Controller
 
     // ---------------------------------------------------------------------------------------------------- //
     //Lấy thông tin phiếu nhập hàng - MaChungTu
-    public function get_maPhieuNhapHang()
-    {
-        $phieunhaphang = PhieuNhapHangHoa::pluck('MaChungTu');
-        return response()->json($phieunhaphang);
-    }
+    // public function get_maPhieuNhapHang()
+    // {
+    //     $phieunhaphang = PhieuNhapHangHoa::pluck('MaChungTu');
+    //     return response()->json($phieunhaphang);
+    // }
 
     //Lấy toàn bộ thông tin
     function get_PhieuNhapHang(){
-        $phieunhaphang = PhieuNhapHangHoa::get();
+        $phieunhaphang = PhieuNhapHangHoaChiTiet::get();
         return response()->json($phieunhaphang);
     }
+
+    // public function get_PhieuNhapHangChiTiet()
+    // {
+    //     $phieunhaphanghoachitiet = PhieuNhapHangHoaChiTiet::get();
+    //     return response()->json($phieunhaphanghoachitiet);
+    // }
 
     // Lấy đơn giá
     public function get_DonGia($machungtu)

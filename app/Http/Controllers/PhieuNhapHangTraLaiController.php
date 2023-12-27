@@ -475,4 +475,10 @@ class PhieuNhapHangTraLaiController extends Controller
         }
     }
 
+    // --
+    function get_PhieuNhapHangTLai(){
+        $phieunhaphangtralai = PhieuNhapHangTraLaiChiTiet::get();
+        return response()->json($phieunhaphangtralai);
+    }
+
 }

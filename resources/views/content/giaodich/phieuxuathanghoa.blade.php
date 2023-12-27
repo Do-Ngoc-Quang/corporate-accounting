@@ -597,6 +597,9 @@
             cell2_2.colSpan = 3;
             cell2_1.innerHTML = `<label>Mặt hàng:</lable>`;
 
+                //---
+                var mahang;
+
             // Fetch dữ liệu, lấy toàn bộ thông tin của hàng hóa
             fetch('get_HangHoa')
                 .then(response => {
@@ -613,6 +616,7 @@
 
                         //Tạo chuỗi HTML chứa thẻ select và các option
                         var selectMaHang = '<select style="width: 100px; text-align: center;" id="maHang"; max-height: 50px; overflow-y: auto; >';
+                        selectMaHang += `<option value="#" selected disabled>Mã hàng</option>`;
                         data.forEach(hh => {
                             selectMaHang += `<option value="${hh.MaHang}">${hh.MaHang}</option>`;
                         });
@@ -626,87 +630,75 @@
                             var selectedValue = this.value;
                             data.forEach(hh => {
                                 if (hh.MaHang == selectedValue) {
+                                    // --
+                                    mahang = hh.MaHang;
+
                                     cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh" value="${hh.DonViTinh}" readonly>`;
                                     cell3.innerHTML = `<input style="width: 100px; text-align: center;" type="text" id="soLuong" placeholder="${hh.SoLuongTonDau}" oninput="ThueGTGT_InputChange()">`;
                                     cell2_2.innerHTML = `<label>${hh.TenHang}</lable>`;
 
                                     $("tr[data-id='trPhieuXuatHangHoa'] td input#matHang").val(hh.TenHang);
-                                }
-                            });
-                        });
-                    });
-                })
-                .catch(error => {
-                    // Xử lý lỗi
-                    console.error('There was a problem with the fetch operation:', error);
-                });
 
-            // // Liệt kê danh sách mã chứng từ nhập hàng
-            // fetch('get_maPhieuNhapHang')
-            //     .then(response => {
-            //         if (!response.ok) {
-            //             throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
-            //         }
-            //         return response.json();
-            //     })
-            //     .then(data => {
-            //         // Tạo chuỗi HTML chứa thẻ select và các option
-            //         var selectMaChungTu = '<select style="width: 150px; text-align: center;" id="maChungTuNhap"; max-height: 50px; overflow-y: auto; >';
-            //         for (var i = 0; i < data.length; i++) {
-            //             selectMaChungTu += `<option value="${data[i]}">${data[i]}</option>`;
-            //         }
-            //         selectMaChungTu += '</select>';
-            //         cell8.innerHTML = selectMaChungTu;
-            //     })
-            //     .catch(error => {
-            //         // Handle errors
-            //         console.error('There was a problem with the fetch operation:', error);
-            //     });
-
-            // Liệt kê danh sách mã chứng từ nhập hàng
-            fetch('get_PhieuNhapHang')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data);
-
-                    //Vào từng object 
-                    data.forEach(phieunhap => {
-
-                        //Tạo chuỗi HTML chứa thẻ select và các option
-                        var selectMaHang = '<select style="width: 150px; text-align: center;" id="maChungTuNhap"; max-height: 50px; overflow-y: auto; >';
-                        data.forEach(pn => {
-                            selectMaHang += `<option value="${pn.MaChungTu}">${pn.MaChungTu}</option>`;
-                        });
-                        selectMaHang += '</select>';
-                        cell4.innerHTML = selectMaHang;
-
-                        var selectElement = document.getElementById('maChungTuNhap');
-
-                        // Thêm xử lý sự kiện change cho thẻ select
-                        selectElement.addEventListener("change", function() {
-                            var selectedValue = this.value;
-                            data.forEach(pn => {
-                                if (pn.MaChungTu == selectedValue) {
-                                    // cell2.innerHTML = `<input style="width: 90px; text-align: center;" type="text" id="donViTinh"  readonly>`;
-
-
-                                    fetch('get_DonGia/' + selectedValue)
+                                    //--
+                                    // Liệt kê danh sách mã chứng từ nhập hàng
+                                    fetch('get_PhieuNhapHang')
                                         .then(response => {
                                             if (!response.ok) {
-                                                throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+                                                throw new Error('Network response was not ok');
                                             }
                                             return response.json();
                                         })
                                         .then(data => {
-                                            cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${data}" readonly>`;
+                                            console.log(data);
+                                            //Vào từng object 
+                                            data.forEach(phieunhap => {
+
+                                                //Tạo chuỗi HTML chứa thẻ select và các option
+                                                var selectMaHang = '<select style="width: 150px; text-align: center;" id="maChungTuNhap"; max-height: 50px; overflow-y: auto; >';
+                                                selectMaHang += `<option value="#" selected disabled>Chứng từ nhập</option>`;
+                                                data.forEach(pn => {
+
+                                                    if (pn.MaHang == mahang) {
+                                                        selectMaHang += `<option value="${pn.MaChungTu}">${pn.MaChungTu}</option>`;
+                                                    }
+                                                });
+                                                selectMaHang += '</select>';
+                                                cell4.innerHTML = selectMaHang;
+
+                                                var selectElement = document.getElementById('maChungTuNhap');
+
+
+
+
+                                                // Thêm xử lý sự kiện change cho thẻ select
+                                                selectElement.addEventListener("change", function() {
+                                                    var selectedValue = this.value;
+                                                    data.forEach(pn => {
+                                                        if (pn.MaChungTu == selectedValue) {
+
+                                                            cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${pn.DonGia}" readonly>`;
+
+                                                            // fetch('get_DonGia/' + selectedValue)
+                                                            //     .then(response => {
+                                                            //         if (!response.ok) {
+                                                            //             throw new Error('Mạng không ổn định, không thể lấy dữ liệu');
+                                                            //         }
+                                                            //         return response.json();
+                                                            //     })
+                                                            //     .then(data => {
+                                                            //         cell5.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaVon" value="${data}" readonly>`;
+                                                            //     })
+                                                            //     .catch(error => {
+                                                            //         // Handle errors
+                                                            //         console.error('There was a problem with the fetch operation:', error);
+                                                            //     });
+                                                        }
+                                                    });
+                                                });
+                                            });
                                         })
                                         .catch(error => {
-                                            // Handle errors
+                                            // Xử lý lỗi
                                             console.error('There was a problem with the fetch operation:', error);
                                         });
                                 }
@@ -718,6 +710,9 @@
                     // Xử lý lỗi
                     console.error('There was a problem with the fetch operation:', error);
                 });
+
+
+
 
             cell6.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="thanhTienGiaVon" readonly>`;
             cell7.innerHTML = `<input style="width: 150px; text-align: center;" type="text" id="donGiaBan" placeholder="Đơn giá bán" oninput="ThueGTGT_InputChange()">`;
@@ -827,7 +822,7 @@
                 }
             },
             error: function(error) {
-                toastr.error("Mã chứng từ không được trùng");
+                toastr.error("Số chứng từ hoặc số lượng xuất không hợp lệ");
                 console.log(error);
             }
         });
@@ -839,10 +834,7 @@
 
         //Phiếu xuất
         var id = $("#id").val();
-        // var maChungTu = $("#maChungTu").val();
-        // var loaiChungTu = $("#loaiChungTu").val();
         var ngayChungTu = $("#ngayChungTu").val();
-        // var soChungTu = $("#soChungTu").val();
         var dienGiai = $("#dienGiai").val();
 
         var taiKhoanNoGiaVon = $("#taiKhoanNoGiaVon").val();
@@ -866,10 +858,7 @@
             method: 'PUT',
             url: '/phieuxuathanghoa_update/' + id,
             data: {
-                // MaChungTu: maChungTu,
-                // LoaiChungTu: loaiChungTu,
                 NgayChungTu: ngayChungTu,
-                // SoChungTu: soChungTu,
                 DienGiai: dienGiai,
 
                 MaKhachHang: maKhachHang,
@@ -926,15 +915,6 @@
         var taiKhoanCoGTGT = $("#taiKhoanCoGTGT").val();
         var thueGTGT = $("#thueGTGT").val();
 
-        // console.log(id_phieuxuathanghoa);
-        // console.log(taiKhoanNoGiaVon);
-        // console.log(taiKhoanCoGiaVon);
-        // console.log(taiKhoanNoGiaBan);
-        // console.log(taiKhoanCoGiaBan);
-        // console.log(taiKhoanCoGTGT);
-        // console.log(thueGTGT);
-
-
         $.ajax({
             method: 'PUT',
             url: '/phieuxuathanghoachitiet_update/' + id,
@@ -963,7 +943,7 @@
                 toastr.success("Cập nhật chi tiết thành công");
             },
             error: function(error) {
-                toastr.error("Lỗi cập nhật");
+                toastr.error("Số lượng xuất vượt quá tồn kho");
                 console.log(error);
             }
         })

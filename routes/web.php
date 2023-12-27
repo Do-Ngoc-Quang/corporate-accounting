@@ -210,6 +210,9 @@ Route::middleware(['auth'])->group(function () {
         //Chi tiết
         Route::get('phieunhaphangtralaichitiet/{machungtu}', 'get_phieunhaphangtralaichitiet');
         Route::put('phieunhaphangtralaichitiet_update/{id}', 'phieunhaphangtralaichitiet_update');
+
+        //
+        Route::get('get_PhieuNhapHangTLai', 'get_PhieuNhapHangTLai');   
     });
 
     //Phiếu xuất hàng trả lại
